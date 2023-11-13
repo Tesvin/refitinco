@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSlice";
 
 export default function SignIn() {
     const [formData, setFormData] = useState({})
+    const { loading, error } = useSelector((state) => state.user);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setFormData({
@@ -15,6 +19,7 @@ export default function SignIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+          dispatch(signInStart());
             const res = await fetch('/api/auth/signin', {
                 method: 'POST',
                 headers: {
@@ -23,10 +28,15 @@ export default function SignIn() {
                 body: JSON.stringify(formData),
             });
             const data = await res.json();
-            console.log(data)
-            navigate('/')
+            console.log(data);
+            if (data.success === false) {
+              dispatch(signInFailure(data.message));
+              return;
+            }
+            dispatch(signInSuccess(data));
+            navigate('/profile');
         } catch (error) {
-            console.log(error)
+            dispatch(signInFailure(error.message));
         }
     }
 
@@ -41,8 +51,8 @@ export default function SignIn() {
       <input type='password' placeholder='password'
       className="border p-3 rounded-lg" id="password" onChange={handleChange}/>
       
-      <button className="bg-yellow-300 font-bold text-green-900 p-3 rounded-lg uppercase hover:opacity-80">
-        Sign In
+      <button disabled={loading} className="bg-yellow-300 font-bold text-green-900 p-3 rounded-lg uppercase hover:opacity-80">
+        {loading ? 'loading...' : 'Sign In'}
       </button>
     </form>
     <div className="flex gap-2 mt-5">
@@ -51,7 +61,7 @@ export default function SignIn() {
         <span className="text-green-300">Sign up</span>
       </Link>
     </div>
-    <p className="text-red-500 mt-5"></p>
+    {error && <p className="text-red-500 mt-5">{error}</p>}
   </div>
   )
 }
