@@ -33,3 +33,9 @@ export const signin = async (req, res, next) => {
     next(error);
   }
 };
+
+/** GET: http://localhost:8080/api/generateOTP */
+export const generateOTP = async (req, res, next) => {
+  req.app.locals.OTP = await otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false })
+  res.status(201).send({ code: req.app.locals.OTP })
+}

@@ -5,7 +5,7 @@ export default function Header() {
     const { currentUser } = useSelector((state) => state.user);
     
   return (
-    <header className="bg-yellow-300 shadow-md">
+    <header className="bg-orange-300 shadow-md">
         <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
             <Link to='/'>
                 <h1 className="font-bold text-sm sm:text-xl flex flex-wrap ">
@@ -19,17 +19,17 @@ export default function Header() {
                     </li>
                 </Link>
                 <Link to='/about'>
-                    <li className="hidden sm:inline text-green-700 hover:underline">
+                    <li className=" sm:inline text-green-700 hover:underline">
                         About
                     </li>
                 </Link>
-                <Link to='/profile'>
+                <Link to='/dashboard'>
                     {currentUser ? (
-                        <div className="rounded-full h-7 w-7 object-cover">
+                        <div className="">
                             {currentUser.firstname}
                         </div>
                     ) : (
-                    <li className="hidden sm:inline text-green-700 hover:underline">
+                    <li className=" sm:inline text-green-700 hover:underline">
                         Sign in
                     </li>
                     )}

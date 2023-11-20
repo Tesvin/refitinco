@@ -6,14 +6,14 @@ export default function SignUp() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
-    })
-  }
-  
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -40,34 +40,61 @@ export default function SignUp() {
       setError(error.message);
     }
   };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
-    <h1 className="text-yellow-300 text-3xl text-center font-semibold my-7">Sign Up</h1>
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <input type='text' placeholder='firstname'
-      className="border p-3 rounded-lg" id="firstname" />
-      
-      <input type='text' placeholder='lastname'
-      className="border p-3 rounded-lg" id="lastname" />
-      
-      <input type='email' placeholder='email'
-      className="border p-3 rounded-lg" id="email" onChange={handleChange}/>
-      
-      <input type='password' placeholder='password'
-      className="border p-3 rounded-lg" id="password" onChange={handleChange}/>
-      
-      <button disabled={loading} className="bg-yellow-300 font-bold text-green-900 p-3 rounded-lg uppercase hover:opacity-80">
-        {loading ? 'loading...' : 'Sign Up'}
-      </button>
-      
-    </form>
-    <div className="flex gap-2 mt-5">
-      <p className="text-yellow-300">Have an account?</p>
-      <Link to={'/sign-in'}>
-        <span className="text-green-300">Sign in</span>
-      </Link>
+      <h1 className="text-yellow-300 text-3xl text-center font-semibold my-7">Sign Up</h1>
+      <form onSubmit={handleSubmit} 
+      className="flex flex-col gap-4">
+        <input
+          type="text"
+          placeholder="firstname"
+          className="border p-3 rounded-lg"
+          id="firstname"
+          onChange={handleChange}
+        />
+        
+        <input
+          type="text"
+          placeholder="lastname"
+          className="border p-3 rounded-lg"
+          id="lastname"
+          onChange={handleChange}
+        />
+
+        <input
+          type="email"
+          placeholder="email"
+          className="border p-3 rounded-lg"
+          id="email"
+          onChange={handleChange}
+        />
+
+        <input
+          type="password"
+          placeholder="password"
+          className="border p-3 rounded-lg"
+          id="password"
+          onChange={handleChange}
+        />
+        
+        <button
+          disabled={loading}
+          className="bg-yellow-300 font-bold text-green-900 p-3 rounded-lg uppercase hover:opacity-80"
+        >
+          {loading ? "loading..." : "Sign Up"}
+        </button>
+      </form>
+      <div className="flex gap-2 mt-5">
+        <p className="text-yellow-300">Have an account?</p>
+        <Link to={"/sign-in"}>
+          <span className="text-green-300">Sign in</span>
+        </Link>
+        {/* <Link to={"/sign-in"}>
+          <span className="p-6 text-red-300">forgoten password?</span>
+        </Link> */}
+      </div>
+      {error && <p className="text-red-500 mt-5">{error}</p>}
     </div>
-    {error && <p className="text-red-500 mt-5"></p>}
-  </div>
-  )
+  );
 }

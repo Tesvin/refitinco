@@ -3,9 +3,11 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Header from "./components/Header";
-import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard"
 import About from "./pages/About";
 import { PrivateRoute } from "./components/PrivateRoute";
+import Footer from "./components/Footer";
+import Buy from "./components/Buy";
 
 
 export default function App() {
@@ -19,9 +21,11 @@ export default function App() {
       <Route path="about" element={<About />}/>
       
       <Route element={<PrivateRoute />}>
-        <Route path="profile" element={<Profile />}/>
+        <Route path="dashboard" element={<Dashboard />}/>
+        <Route path="buy" element={<Buy />}/>
       </Route>
     </Routes>
+    <Footer />
     </BrowserRouter>
   )
 }
