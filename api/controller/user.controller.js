@@ -1,6 +1,6 @@
-import User from '../model/user.model';
+import User from '../model/user.model.js';
 import bcryptjs from 'bcryptjs';
-import { errorHandler } from '../utils/error';
+import { errorHandler } from '../utils/error.js';
 
 export const updateUser = async (req, res, next) => {
     if (req.user.id !== req.params.id)
@@ -23,7 +23,7 @@ export const updateUser = async (req, res, next) => {
             { new: true }
         );
 
-        const { password, ...rest } = updated._doc;
+        const { password, ...rest } = updatedUser._doc;
 
         res.status(200).json(rest);
     } catch (error) {

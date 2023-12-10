@@ -8,8 +8,8 @@ export default function Home() {
         <h1 className="p-4 text-center text-2xl font-bold">
             <span>Crowdfund To Co-own A Tech Start-Up Today!!!</span>
         </h1>
-        <nav className="bg-yellow-300 p-6 m-6">
-            <h1 className="p-4 text-center text-2xl font-bold">ARE YOU READY TO HARNESS</h1>
+        <nav className="bg-[#0a192f] p-6 m-6">
+            <h1 className="p-4 text-center text-white text-2xl font-bold">ARE YOU READY TO HARNESS</h1>
         </nav>
         <div className='flex m-4'>
           <div>

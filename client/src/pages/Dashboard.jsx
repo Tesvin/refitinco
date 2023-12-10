@@ -1,6 +1,11 @@
+import Flutterwave from "../components/flutterwavePayment";
+import Profile from "./Profile";
 
-export default function Profile() {
+export default function Dashboard() {
   return (
-    <div className="text-yellow-300">Dashboard</div>
+    <div className="">
+        <Flutterwave /> 
+        <Profile />
+    </div>
   )
 }

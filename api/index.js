@@ -1,11 +1,28 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser'
-import connectMongodb from './database/connectMongodb.js';
+import cookieParser from 'cookie-parser';
+//import connectMongodb from './database/connectMongodb.js';
 import authRouter from './routes/auth.route.js';
-import cors from 'cors'
+import userRouter from './routes/user.route.js'
+import authPayment from './routes/auth.payment.js';
+import cors from 'cors';
+import path from 'path';
+import mongoose from "mongoose";
 import bodyParser from 'body-parser';
 dotenv.config();
+
+
+mongoose
+.connect(process.env.MONGO)
+.then(() => {
+    console.log('Connected to MongoDB!');
+})
+.catch((err) => {
+    console.log(err);
+});
+
+const __dirname = path.resolve();
+
 
 const app = express()
 
@@ -15,20 +32,20 @@ app.use(cors())
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-app.use('/api/auth', authRouter);
-
 const port = process.env.PORT;
 
-connectMongodb().then(() => {
-    try {
-        app.listen(port, () => {
-            console.log(`server connected to https://localhost:${port}`)
-        }) 
-    } catch (error) {
-        console.log('Cannot connect to the server')
-    }
-}).catch(error => {
-    console.log('Invalid database connection...!')
+app.listen(port, () => {
+    console.log(`server connected to https://localhost:${port}`)
+})
+
+app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
+app.use('/api/auth', authPayment);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 })
 
   

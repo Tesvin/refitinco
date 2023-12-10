@@ -39,3 +39,13 @@ export const generateOTP = async (req, res, next) => {
   req.app.locals.OTP = await otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false })
   res.status(201).send({ code: req.app.locals.OTP })
 }
+
+
+export const signOut = async (req, res, next) => {
+  try {
+    res.clearCookie('a`ccess_token');
+    res.status(200).json('User has been logged out!');
+  } catch (error) {
+    next(error);
+  }
+};

@@ -8,7 +8,8 @@ import About from "./pages/About";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Footer from "./components/Footer";
 import Buy from "./components/Buy";
-
+import Flutterwave from "./components/flutterwavePayment";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -19,10 +20,12 @@ export default function App() {
       <Route path="sign-in" element={<SignIn />}/>
       <Route path="sign-up" element={<SignUp />}/>
       <Route path="about" element={<About />}/>
+      <Route path="buy" element={<Buy />}/>
       
       <Route element={<PrivateRoute />}>
+        <Route path="Profile" element={<Profile />}/>
         <Route path="dashboard" element={<Dashboard />}/>
-        <Route path="buy" element={<Buy />}/>
+        <Route path="flutterwave" element={<Flutterwave />}/>
       </Route>
     </Routes>
     <Footer />
