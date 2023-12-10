@@ -81,12 +81,12 @@ export default function Header() {
               : "absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center"
           }
         >
-            <li className="py-6 text-4xl text-white">
+            <li className="py-6 text-4xl text-white hover:underline">
           <Link onClick={handleClick} to="/">
               Home
           </Link>
             </li>
-            <li className="py-6 text-4xl text-white">
+            <li className="py-6 text-4xl text-white hover:underline">
           <Link onClick={handleClick} to="/about">
               About
           </Link>
@@ -95,11 +95,11 @@ export default function Header() {
             {
               currentUser ? (
                 <div className="">
-                  <li className="py-6 text-4xl text-white">
+                  <li className="py-6 text-4xl text-white hover:underline">
                     {currentUser.firstname}
                   </li>
                   <Link to="/flutterwave">
-                    <li className="py-6 text-4xl text-white">
+                    <li className="py-6 text-4xl text-white hover:underline">
                       Buy
                     </li>
                   </Link>
@@ -110,7 +110,7 @@ export default function Header() {
                   </Link> */}
                 </div>
               ) : (
-                <li className=" sm:inline text-white hover:underline">
+                <li className="py-6 text-4xl text-white hover:underline">
                   Sign in
                 </li>
               )

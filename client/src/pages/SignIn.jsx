@@ -45,8 +45,8 @@ export default function SignIn() {
   };
 
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-yellow-300 text-3xl text-center font-semibold my-7">
+    <div className=" p-3 max-w-lg mx-auto">
+      <h1 className="text-[#0a192f] text-3xl text-center font-bold my-7">
         Sign In
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -68,15 +68,15 @@ export default function SignIn() {
 
         <button
           disabled={loading}
-          className="bg-yellow-300 font-bold text-green-900 p-3 rounded-lg uppercase hover:opacity-80"
+          className="bg-[#0a192f] font-bold text-white p-3 rounded-lg uppercase hover:opacity-80"
         >
           {loading ? "loading..." : "Sign In"}
         </button>
       </form>
       <div className="flex gap-2 mt-5">
-        <p className="text-yellow-300">Have an account?</p>
+        <p className="text-black">Have an account?</p>
         <Link to={"/sign-up"}>
-          <span className="text-green-300">Sign up</span>
+          <span className="text-[#0a192f] font-bold">Sign up</span>
         </Link>
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}
