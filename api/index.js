@@ -4,9 +4,9 @@ import cookieParser from 'cookie-parser';
 //import connectMongodb from './database/connectMongodb.js';
 import authRouter from './routes/auth.route.js';
 import userRouter from './routes/user.route.js'
-import authPayment from './routes/auth.payment.js';
+//import authPayment from './routes/auth.payment.js';
 import cors from 'cors';
-import path from 'path';
+//import path from 'path';
 import mongoose from "mongoose";
 import bodyParser from 'body-parser';
 dotenv.config();
@@ -40,7 +40,7 @@ app.listen(port, () => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
-app.use('/api/auth', authPayment);
+//app.use('/api/auth', authPayment);
 
 // app.use(express.static(path.join(__dirname, '/client/dist')));
 
