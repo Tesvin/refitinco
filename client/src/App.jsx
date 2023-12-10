@@ -8,7 +8,7 @@ import About from "./pages/About";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Footer from "./components/Footer";
 import Buy from "./components/Buy";
-import Flutterwave from "./components/flutterwavePayment";
+import Flutterwave from "./components/Flutterwave";
 import Profile from "./pages/Profile";
 
 export default function App() {
