@@ -6,8 +6,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://refitinco.onrender.com/',
-        //target: 'http://localhost:8080',
+        //target: 'https://refitinco.onrender.com/',
+        target: 'http://localhost:8080',
         secure: false,
       },
     },

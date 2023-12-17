@@ -16,8 +16,8 @@ export default function Flutterwave() {
     payment_options: "card,mobilemoney,ussd",
 
     // specified redirect URL
-    //redirect_url: "http://localhost:8080/api/transaction/response",
-    redirect_url: "https://refitinco.onrender.com/api/transaction/response",
+    redirect_url: "/api/transaction/response",
+    //redirect_url: "https://refitinco.onrender.com/api/transaction/response",
 
     customer: {
       email: email,
