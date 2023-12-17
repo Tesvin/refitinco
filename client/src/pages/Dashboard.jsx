@@ -1,10 +1,11 @@
-// import Flutterwave from "../components/Flutterwave";
-// import Profile from "./Profile";
+import Wallet from '../components/Wallet'
 
 export default function Dashboard() {
+
   return (
-    <div className="">
-        White Paper
-    </div>
-  )
+      <div className="">
+       <span className=''>Money Invested =</span>
+       <Wallet />
+      </div>
+    );
 }

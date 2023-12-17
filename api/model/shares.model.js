@@ -1,22 +1,22 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
-const sharesSchema = new mongoose.Schema(
-    {
-        amount: {
-            type: Number,
-            required: true,
-        },
-        description: {
-            type: String,
-            required: true
-        },
-        userRef: {
-            type: String,
-            required: true,
-        },
-    }, {timestamps: true}
-)
+const shareSchema = new mongoose.Schema({
+  symbol: {
+    type: String,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  // Reference to the Wallet model
+  wallet: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Wallet',
+    required: true,
+  },
+});
 
-const shares = mongoose.model('Shares', sharesSchema);
+const Share = mongoose.model('Share', shareSchema);
 
-export default Listing;
+module.exports = Share;

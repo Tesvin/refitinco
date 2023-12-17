@@ -11,11 +11,11 @@ export default function Home() {
         <nav className="bg-[#0a192f] p-6 m-6">
             <h1 className="p-4 text-center text-white text-2xl font-bold">ARE YOU READY TO HARNESS</h1>
         </nav>
-        <div className='flex m-4'>
+        <div className='sm:flex m-4'>
           <div>
             <img src={Ref1} alt='crowd'/>
           </div>
-          <div className='p-6 font-bold'>
+          <div className='p-6 font-bold text-center'>
             <h2>THE POWER</h2>
             <h3>OF THE INTERNET?!!!</h3>
             <Link to='#'>

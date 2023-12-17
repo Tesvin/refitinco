@@ -1,3 +1,5 @@
+
+
 export default function About() {
   return (
     <div className="bg-[#0a192f]">
@@ -30,7 +32,7 @@ export default function About() {
           many problems especially as it relates to the very need of Africa and
           the black race in general, while raking in massive financial financial
           returns for the owners.
-        </p>
+        </p>  
       </div>
     </div>
   );

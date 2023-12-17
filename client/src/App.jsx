@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Buy from "./components/Buy";
 import Flutterwave from "./components/Flutterwave";
 import Profile from "./pages/Profile";
+import Wallet from "./components/Wallet"
 
 export default function App() {
   return (
@@ -24,7 +25,8 @@ export default function App() {
       
       <Route element={<PrivateRoute />}>
         <Route path="Profile" element={<Profile />}/>
-        <Route path="dashboard" element={<Dashboard />}/>
+        <Route path="dashboard/" element={<Dashboard />}/>
+        <Route path="/wallet/:userId" element={<Wallet />}/>
         <Route path="flutterwave" element={<Flutterwave />}/>
       </Route>
     </Routes>

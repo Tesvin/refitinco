@@ -14,6 +14,10 @@ export default function Flutterwave() {
     amount: amount,
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
+
+    // specified redirect URL
+    redirect_url: "http://localhost:8080/api/transaction/response",
+
     customer: {
       email: email,
       phone_number: phone,
@@ -62,7 +66,7 @@ export default function Flutterwave() {
         />
         <input
           className="border p-3 rounded-lg"
-          type="text"
+          type="number"
           placeholder="Phone"
           onChange={(e) => setPhone(e.target.value)}
         />
