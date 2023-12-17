@@ -6,7 +6,7 @@ import authRouter from './routes/auth.route.js';
 import userRouter from './routes/user.route.js'
 import transactionRouth from './routes/transactionRouth.js'
 import cors from 'cors';
-//import path from 'path';
+import path from 'path';
 import mongoose from "mongoose";
 import bodyParser from 'body-parser';
 dotenv.config();
@@ -21,7 +21,7 @@ mongoose
     console.log(err);
 });
 
-//const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 const app = express()
 
@@ -41,11 +41,11 @@ app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/transaction', transactionRouth);
 
-//app.use(express.static(path.join(__dirname, '/client/dist')));
+app.use(express.static(path.join(__dirname, '/client/dist')));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
   
 app.use((err, req, res, next) => {
