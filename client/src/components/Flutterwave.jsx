@@ -9,7 +9,7 @@ export default function Flutterwave() {
   //const [loading, setLoading] = useState(false);
 
   const config = {
-    public_key: "FLWPUBK_TEST-2375f44c6053efa90d0cbd84d3c5827f-X",
+    public_key: "FLWPUBK_TEST-cea6d3cd00566846c47c63eed72efd1f-X",
     tx_ref: Date.now(),
     amount: amount,
     currency: "NGN",
