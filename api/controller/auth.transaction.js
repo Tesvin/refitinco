@@ -4,9 +4,13 @@ import WalletTransaction from "../model/wallet_transaction.js";
 import Transaction from "../model/transaction.js";
 import axios from "axios";
 import dotenv from 'dotenv';
+import Share from '../model/shares.model.js';
+import OrganizationShares from "../model/OrganizationShares.model.js";
+
 dotenv.config();
 
 //...
+
 
 export const response = async (req, res) => {
     const { transaction_id } = req.query;
@@ -168,3 +172,139 @@ export const balance = async (req, res) => {
     }
   };
 
+  //let totalSharesInOrganization = 9000; // Initial total share in the organization
+
+  // Initialize total shares in the organization
+  const initializeTotalSharesInOrganization = async () => {
+    try {
+      let organizationShares = await OrganizationShares.findOne();
+      if (!organizationShares) {
+        organizationShares = new OrganizationShares({
+          totalSharesInOrganization: 9000,
+          remainingSharesInOrganization: 9000,
+          totalSharesBoughtByUsers: 0,
+        });
+        await organizationShares.save();
+      }
+    } catch (error) {
+      console.error("Error initializing organization shares:", error);
+    }
+  };
+
+initializeTotalSharesInOrganization();
+
+  export const calculateShares = async (req, res) => {
+    // Calculate total amount in each user's wallet and convert to shares
+    try {
+        //const { userId } = req.params;
+        // Get all wallets 
+        let wallets = await Wallet.findOne();
+
+        // Convert to array if it's not already
+         if (!Array.isArray(wallets)) {
+           wallets = [wallets];
+        }
+
+        //console.log("Type of wallets:", typeof wallets);
+
+
+        if (!Array.isArray(wallets)) {
+          return res.status(500).json({ message: "Wallets data is not iterable" });
+        }
+
+        // Create an array to store the results
+        const results = [];
+
+        // Accumulate total shares bought across all users
+        let totalSharesBought = 0;
+
+        // Accumulate total shares bought by all users
+        let totalSharesBoughtByUsers = 0;
+
+        // Calculate total amount and convert to shares
+        for (const wallet of wallets) {
+            const totalAmount = wallet.balance;
+            const sharesBought = totalAmount / 25000;
+            
+            // Check if the user has a share record
+            let share = await Share.findOne({ userId: wallet.userId });
+
+            // If the user does not have a share record, create one
+            if (!share) {
+                share = new Share({
+                    userId: wallet.userId,
+                    totalShares: 0, // Initialize totalShares to 0
+                    lastBalance: totalAmount, // Initialize lastBalance
+                    transactions: [{ sharesBought, timestamp: new Date() }],
+                    //sharesBought
+                });
+            } else {
+              // Ensure that the transactions array is initialized
+              if (!share.transactions) {
+                  share.transactions = [];
+              }
+
+              // Check if the wallet balance has changed
+              if (wallet.balance !== share.lastBalance) {
+              // If the user already has a share record and the balance has changed, update the transactions
+              share.transactions.push({ sharesBought, timestamp: new Date() });
+
+              // Update the total shares for the user
+              share.totalShares = sharesBought;
+
+              // Update the last balance
+              share.lastBalance = wallet.balance;
+              
+            }
+            // Subtract sharesBought from totalSharesInOrganization only when the balance changes
+            totalSharesBoughtByUsers += sharesBought;
+          }
+
+            // Update the total shares for the user
+            //share.totalShares += sharesBought;
+
+            // Save the share record 
+            await share.save();
+
+            // Update total share in the organization
+            //totalSharesInOrganization -= sharesBought;
+
+            // Add the result to the array
+            results.push({
+                userId: wallet.userId,
+                sharesBought,
+                totalSharesForUser: share.totalShares,
+                remainingSharesInOrganization: share.totalSharesInOrganization,
+            });
+
+            // Accumulate sharesBought for all users
+            totalSharesBought += sharesBought;
+        }
+
+        // Subtract totalSharesBought from totalSharesInOrganization
+        //totalSharesInOrganization -= totalSharesBought;
+
+        // Get the latest organization shares from the database
+        const organizationShares = await OrganizationShares.findOne();
+
+        // Subtract totalSharesBoughtByUsers from remainingSharesInOrganization
+        organizationShares.remainingSharesInOrganization -= totalSharesBoughtByUsers;
+
+        // Update totalSharesBoughtByUsers in the database
+        organizationShares.totalSharesBoughtByUsers += totalSharesBoughtByUsers;
+
+        // Save the updated organization shares
+        await organizationShares.save();
+
+        return res.status(200).json({ 
+            message: 'Shares calculated successfully',
+            results,
+            totalSharesInOrganization: organizationShares.totalSharesInOrganization,
+            remainingSharesInOrganization: organizationShares.remainingSharesInOrganization,
+            totalSharesBoughtByUsers: organizationShares.totalSharesBoughtByUsers,
+         });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }   
+}

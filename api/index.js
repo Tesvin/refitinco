@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.route.js';
 import userRouter from './routes/user.route.js'
 import transactionRouth from './routes/transactionRouth.js'
+//import calculateShares from './routes/shares.route.js'
 import cors from 'cors';
 import path from 'path';
 import mongoose from "mongoose";
@@ -40,6 +41,7 @@ app.listen(port, () => {
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/transaction', transactionRouth);
+//app.use('api/shares', calculateShares);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
