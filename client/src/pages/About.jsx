@@ -2,9 +2,9 @@
 
 export default function About() {
   return (
-    <div className="bg-[#0a192f]">
-      <div className="text-[#8892b0] text-center font-bold">About Us</div>
-      <div className="text-[#ccd6f6] p-4">
+    <div className="">
+      <div className="text-black text-center text-2xl font-bold">About Us</div>
+      <div className="text-black p-4">
         Refitinco Solutions are a group of Seasoned Entreprenuers with Interest
         in Real Estate, Finance and Information Technology (IT) in Partnership
         with Web79 Tech Hub, a Web development Company with lots Projects to

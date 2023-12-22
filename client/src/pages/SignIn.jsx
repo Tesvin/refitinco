@@ -38,7 +38,7 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
@@ -46,7 +46,7 @@ export default function SignIn() {
 
   return (
     <div className=" p-3 max-w-lg mx-auto">
-      <h1 className="text-[#0a192f] text-3xl text-center font-bold my-7">
+      <h1 className="text-green-900 text-3xl text-center font-bold my-7">
         Sign In
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -68,7 +68,7 @@ export default function SignIn() {
 
         <button
           disabled={loading}
-          className="bg-[#0a192f] font-bold text-white p-3 rounded-lg uppercase hover:opacity-80"
+          className="bg-green-900 font-bold text-white p-3 rounded-lg uppercase hover:opacity-80"
         >
           {loading ? "loading..." : "Sign In"}
         </button>

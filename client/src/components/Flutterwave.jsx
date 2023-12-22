@@ -27,7 +27,7 @@ export default function Flutterwave() {
     customer: {
       email: email,
       //phone_number: phone,
-      name: name,
+      //name: name,
     },
     customizations: {
       title: "my Payment Title",
@@ -80,7 +80,7 @@ export default function Flutterwave() {
         /> */}
 
         <button 
-        className="bg-[#0a192f] font-bold text-white p-3 rounded-lg uppercase hover:opacity-80"
+        className="bg-green-900 font-bold text-white p-3 rounded-lg uppercase hover:opacity-80"
           onClick={() =>
             handleFlutterPayment({
               callback: (response) => {

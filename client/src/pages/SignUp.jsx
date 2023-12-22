@@ -43,7 +43,7 @@ export default function SignUp() {
 
   return (
     <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-[#0a192f] text-3xl text-center font-bold my-7">Sign Up</h1>
+      <h1 className="text-green-900 text-3xl text-center font-bold my-7">Sign Up</h1>
       <form onSubmit={handleSubmit} 
       className="flex flex-col gap-4">
         <input
@@ -80,7 +80,7 @@ export default function SignUp() {
         
         <button
           disabled={loading}
-          className="bg-[#0a192f] font-bold text-white p-3 rounded-lg uppercase hover:opacity-80"
+          className="bg-green-900 font-bold text-white p-3 rounded-lg uppercase hover:opacity-80"
         >
           {loading ? "loading..." : "Sign Up"}
         </button>

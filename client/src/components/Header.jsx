@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-
 export default function Header() {
   const params = useParams();
   const [nav, setNav] = useState(false);
@@ -13,7 +12,7 @@ export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
 
   return (
-    <header className="bg-[#0a192f] shadow-md">
+    <header className="bg-green-900 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <div>
           <Link to="/">
@@ -45,11 +44,11 @@ export default function Header() {
                         Buy
                       </li>
                     </Link>
-                    {/* <Link to="/dashboard">
+                    <Link to="/dashboard">
                       <li className="m-2 sm:inline text-white hover:underline">
                         Dashboard
                       </li>
-                    </Link> */}
+                    </Link>
                   </div>
                 ) : (
                   <li className=" sm:inline text-white hover:underline">
@@ -77,7 +76,7 @@ export default function Header() {
           className={
             !nav
               ? "hidden"
-              : "absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center"
+              : "absolute top-0 left-0 w-full h-screen bg-green-900 flex flex-col justify-center items-center"
           }
         >
           <li className="py-6 text-4xl text-white hover:underline">
@@ -92,30 +91,28 @@ export default function Header() {
           </li>
           <li>
             <Link onClick={handleClick} to="/profile">
-              
-            {currentUser ? (
-  <div className="items-center justify-center">
-    <li className="py-6 text-4xl text-white hover:underline">
-      {currentUser.firstname}
-    </li>
-    {/* <li className="py-6 text-4xl text-white hover:underline">
-      <Link to="/dashboard">Dashboard</Link>
-    </li> */}
-    <li className="py-6 text-4xl text-white hover:underline">
-      <Link to="/flutterwave">Buy</Link>
-    </li>
-    {/* {params.userId && (
+              {currentUser ? (
+                <div className="items-center justify-center">
+                  <li className="py-6 text-4xl text-white hover:underline">
+                    {currentUser.firstname}
+                  </li>
+                  {/* <li className="py-6 text-4xl text-white hover:underline">
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li> */}
+                  <li className="py-6 text-4xl text-white hover:underline">
+                    <Link to="/flutterwave">Buy</Link>
+                  </li>
+                  {/* {params.userId && (
       <li className="py-6 text-4xl text-white hover:underline">
         <Link to={`/wallet/${params.userId}`}>Balance</Link>
       </li>
     )} */}
-  </div>
-) : (
-  <li className="py-6 text-4xl text-white hover:underline">
-    Sign in
-  </li>
-)}
-
+                </div>
+              ) : (
+                <li className="py-6 text-4xl text-white hover:underline">
+                  Sign in
+                </li>
+              )}
 
               {/* {
                 currentUser ? (

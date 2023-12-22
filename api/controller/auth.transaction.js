@@ -66,8 +66,9 @@ export const response = async (req, res) => {
 export const balance = async (req, res) => {
     try {
       const { userId } = req.params;
-      // const { userId } = await Wallet.findById(req.params.userId)
+      //const { userId } = await Wallet.findById(req.params.userId)
       const wallet = await Wallet.findOne({ userId });
+      //const wallet = await Wallet.findById({ userId });
       // user
       res.status(200).json(wallet.balance);
     } catch (err) {
@@ -255,9 +256,9 @@ initializeTotalSharesInOrganization();
               // Update the last balance
               share.lastBalance = wallet.balance;
               
+              // Subtract sharesBought from totalSharesInOrganization only when the balance changes
+              totalSharesBoughtByUsers += sharesBought;
             }
-            // Subtract sharesBought from totalSharesInOrganization only when the balance changes
-            totalSharesBoughtByUsers += sharesBought;
           }
 
             // Update the total shares for the user

@@ -119,7 +119,7 @@ export default function Profile() {
       />
       <button
         disabled={loading}
-        className='bg-[#0a192f] text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
+        className='bg-green-800 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
       >
         {loading ? 'Loading...' : 'Update'}
       </button>
