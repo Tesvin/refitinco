@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Ref1 from '../assets/Ref1.jpg'
 import Ref2 from '../assets/Ref2.jpg'
+import ScrollingIcons from '../components/ScrollingIcons'
 
 export default function Home() {
   return (
@@ -25,6 +26,9 @@ export default function Home() {
           <div>
             <img src={Ref2} alt='$25 per Unit'/>
           </div>
+        </div>
+        <div className='item-center'>
+          {/* <ScrollingIcons /> */}
         </div>
     </div>
   )
