@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const SharesDashboard = () => {
   const [userShares, setUserShares] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const params = useParams();
+console.log(params)
   useEffect(() => {
     const fetchUserShares = async () => {
       try {
         // Replace '/api/calculateShares' with your actual API endpoint
-        const response = await axios.get(`/api/transaction/calculateShares/:userId`);
+        const response = await axios.get(`/api/transaction/calculateShares/${params.userId}`);
 
         setUserShares(response.data.results);
         setLoading(false);

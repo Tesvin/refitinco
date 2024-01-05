@@ -3,7 +3,7 @@ import { mongoose, Schema, model } from "mongoose";
 const walletSchema = new mongoose.Schema(
   {
     balance: { 
-        type: Number, 
+        type: Number,
         default: 0 
     },
     userId: {

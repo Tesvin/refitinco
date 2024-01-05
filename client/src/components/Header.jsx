@@ -96,9 +96,9 @@ export default function Header() {
                   <li className="py-6 text-4xl text-white hover:underline">
                     {currentUser.firstname}
                   </li>
-                  {/* <li className="py-6 text-4xl text-white hover:underline">
+                  <li className="py-6 text-4xl text-white hover:underline">
                     <Link to="/dashboard">Dashboard</Link>
-                  </li> */}
+                  </li>
                   <li className="py-6 text-4xl text-white hover:underline">
                     <Link to="/flutterwave">Buy</Link>
                   </li>

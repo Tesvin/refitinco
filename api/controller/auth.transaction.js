@@ -70,7 +70,7 @@ export const balance = async (req, res) => {
       const wallet = await Wallet.findOne({ userId });
       //const wallet = await Wallet.findById({ userId });
       // user
-      res.status(200).json(wallet.balance);
+       res.status(200).json(wallet.balance);
     } catch (err) {
       console.log(err);
     }

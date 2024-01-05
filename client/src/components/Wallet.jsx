@@ -17,7 +17,7 @@ const WalletBalance = () => {
     const fetchBalance = async () => {
       try {
         // Check if userId is truthy before making the API call
-      if (!params) {
+      if (!params.userId) {
         setError('User ID is undefined');
         setLoading(false);
         return;
@@ -34,7 +34,7 @@ const WalletBalance = () => {
 
     //const userId = "6550db2f5788c5c1572f9856"
     fetchBalance();
-  }, [params.userId]); // Include userId in the dependency array to re-fetch when userId changes
+  }, [params]); // Include userId in the dependency array to re-fetch when userId changes
 
 
   return (
