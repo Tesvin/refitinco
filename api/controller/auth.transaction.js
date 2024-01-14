@@ -76,15 +76,13 @@ export const balance = async (req, res) => {
     }
   };
 
-// export const getBalance = async (req, res) => {
+// export const balance = async (req, res) => {
 //   try {
-//     const balance = await Wallet.findById(req.params.id);
-//     if(!balance) {
-//       return error
-//     }
-//     res.status(200).json(balance)
+//     const { userid } = req.query;
+//     const wallet = await Wallet.findOne(userid);
+//     res.status(200).json(wallet.balance);
 //   } catch (error) {
-    
+//     console.log(error)
 //   }
 // }
 
@@ -176,6 +174,7 @@ export const balance = async (req, res) => {
   //let totalSharesInOrganization = 9000; // Initial total share in the organization
 
   // Initialize total shares in the organization
+
   const initializeTotalSharesInOrganization = async () => {
     try {
       let organizationShares = await OrganizationShares.findOne();

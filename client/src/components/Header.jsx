@@ -46,7 +46,7 @@ export default function Header() {
                     </Link>
                     <Link to="/dashboard">
                       <li className="m-2 sm:inline text-white hover:underline">
-                        Dashboard
+                        Shares
                       </li>
                     </Link>
                   </div>
@@ -97,7 +97,7 @@ export default function Header() {
                     {currentUser.firstname}
                   </li>
                   <li className="py-6 text-4xl text-white hover:underline">
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to="/dashboard">Shares</Link>
                   </li>
                   <li className="py-6 text-4xl text-white hover:underline">
                     <Link to="/flutterwave">Buy</Link>

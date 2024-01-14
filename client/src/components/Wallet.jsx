@@ -1,41 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 
 const WalletBalance = () => {
   const [balance, setBalance] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
+  console.log(currentUser._id)
+  //const dispatch = useDispatch();
 
-  // Use the useParams hook from React Router to extract the userId from the route
-  const params = useParams();
-  console.log(params); // Add this line to check the value in the console
-
-
-  useEffect(() => {
+    useEffect(() => {
     const fetchBalance = async () => {
       try {
-        // Check if userId is truthy before making the API call
-      if (!params.userId) {
-        setError('User ID is undefined');
-        setLoading(false);
-        return;
-      }
         // Replace 'YOUR_API_BASE_URL' with the base URL of your API
-        const response = await axios.get(`/api/transaction/wallet/${params.userId}`);
+        const response = await axios.get(`/api/transaction/wallet/${currentUser._id}`);
         setBalance(response.data);
       } catch (error) {
-        setError('Error fetching wallet balance');
+        error('Error fetching wallet balance');
       } finally {
-        setLoading(false);
+        loading(false);
       }
     };
 
     //const userId = "6550db2f5788c5c1572f9856"
     fetchBalance();
-  }, [params]); // Include userId in the dependency array to re-fetch when userId changes
-
+  }, []); // Include userId in the dependency array to re-fetch when userId changes
 
   return (
     <div>
@@ -47,6 +36,56 @@ const WalletBalance = () => {
 };
 
 export default WalletBalance;
+
+// import { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { useParams } from 'react-router-dom';
+
+
+// const WalletBalance = () => {
+//   const [balance, setBalance] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+//   // Use the useParams hook from React Router to extract the userId from the route
+//   const params = useParams();
+//   console.log(params); // Add this line to check the value in the console
+
+
+//   useEffect(() => {
+//     const fetchBalance = async () => {
+//       try {
+//         // Check if userId is truthy before making the API call
+//       if (!params.userId) {
+//         setError('User ID is undefined');
+//         setLoading(false);
+//         return;
+//       }
+//         // Replace 'YOUR_API_BASE_URL' with the base URL of your API
+//         const response = await axios.get(`/api/transaction/wallet/${params.userId}`);
+//         setBalance(response.data);
+//       } catch (error) {
+//         setError('Error fetching wallet balance');
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     //const userId = "6550db2f5788c5c1572f9856"
+//     fetchBalance();
+//   }, [params]); // Include userId in the dependency array to re-fetch when userId changes
+
+
+//   return (
+//     <div>
+//       {loading && <p>Loading...</p>}
+//       {error && <p>{error}</p>}
+//       {balance !== null && <p>Wallet Balance: {balance}</p>}
+//     </div>
+//   );
+// };
+
+// export default WalletBalance;
 
 
 
@@ -108,3 +147,5 @@ export default WalletBalance;
 //       </div>
 //     );
 // }
+
+
