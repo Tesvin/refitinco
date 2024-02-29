@@ -7,7 +7,7 @@ import {
   signInFailure,
 } from "../redux/user/userSlice";
 
-export default function SignIn() {
+export default function Forget() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -47,18 +47,10 @@ export default function SignIn() {
   return (
     <div className=" p-3 max-w-lg mx-auto">
       <h1 className="text-green-900 text-3xl text-center font-bold my-7">
-        Sign In
+       Reset Password
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          type="email"
-          placeholder="Email"
-          className="border p-3 rounded-lg"
-          id="email"
-          required
-          onChange={handleChange}
-        />
-
+        
         <input
           type="password"
           placeholder="Password"
@@ -67,21 +59,26 @@ export default function SignIn() {
           required
           onChange={handleChange}
         />
-        <small className="text-right mt-0 underline">
-          <Link to={'/forget'}>Forget password?</Link>
-        </small>
+
+        <input
+          type="password"
+          placeholder="Confirm password"
+          className="border p-3 rounded-lg"
+          id="confirm"
+          required
+          onChange={handleChange}
+        />
 
         <button
           disabled={loading}
           className="bg-green-900 font-bold text-white p-3 rounded-lg uppercase hover:opacity-80"
         >
-          {loading ? "loading..." : "Sign In"}
+          {loading ? "loading..." : "Submit"}
         </button>
       </form>
       <div className="flex gap-2 mt-5">
-        <p className="text-black">Have an account?</p>
-        <Link to={"/sign-up"}>
-          <span className="text-[#0a192f] font-bold">Sign up</span>
+        <Link to={"/sign-in"}>
+          <span className="text-[#0a192f] font-bold">Back to Sign in</span>
         </Link>
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}

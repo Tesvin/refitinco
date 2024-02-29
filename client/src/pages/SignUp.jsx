@@ -48,33 +48,46 @@ export default function SignUp() {
       className="flex flex-col gap-4">
         <input
           type="text"
-          placeholder="firstname"
+          placeholder="Firstname"
           className="border p-3 rounded-lg"
           id="firstname"
+          required
           onChange={handleChange}
         />
         
         <input
           type="text"
-          placeholder="lastname"
+          placeholder="Lastname"
           className="border p-3 rounded-lg"
           id="lastname"
+          required
           onChange={handleChange}
         />
 
         <input
           type="email"
-          placeholder="email"
+          placeholder="Email"
           className="border p-3 rounded-lg"
           id="email"
+          required
           onChange={handleChange}
         />
 
         <input
-          type="password"
-          placeholder="password"
+          type="Password"
+          placeholder="Password"
           className="border p-3 rounded-lg"
           id="password"
+          required
+          onChange={handleChange}
+        />
+
+        <input
+          type="text"
+          name="refer_token"
+          placeholder="Referral code | optional"
+          id="referral"
+          className="border p-3 rounded-lg"
           onChange={handleChange}
         />
         
@@ -91,7 +104,7 @@ export default function SignUp() {
           <span className="text-[#0a192f] font-bold">Sign in</span>
         </Link>
         {/* <Link to={"/sign-in"}>
-          <span className="p-6 text-red-300">forgoten password?</span>
+          <span className="p-6 text-red-300">forgotten password?</span>
         </Link> */}
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}

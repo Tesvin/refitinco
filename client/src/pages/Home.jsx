@@ -19,7 +19,7 @@ export default function Home() {
           <div className='p-6 font-bold text-center'>
             <h2>THE POWER</h2>
             <h3>OF THE INTERNET?!!!</h3>
-            <Link to='#'>
+            <Link to='/sign-in'>
               <h1 className='bg-green-700 cursor-pointer border p-2 text-white rounded-lg'>Purchase Units Now</h1>
             </Link>
           </div>
