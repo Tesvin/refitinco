@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.session import Session
-from user import Base, User
+from model.user import Base, User
 
 
 class DB:
@@ -27,12 +27,13 @@ class DB:
             self.__session = DBSession()
         return self.__session
     
-    def add_user(self, email: str, hashed_password: str) -> User:
+    def add_user(self, **kwargs) -> User:
         """a method that add user"""
-        user = User()
-        self._session.add(user)
-        self._session.commit()
-        return user
+        if kwargs:
+            user = User(**kwargs)
+            self._session.add(user)
+            self._session.commit()
+            return user
     
     def find_user_by(self, **kwargs) -> User:
         """a method that find the user"""
