@@ -23,3 +23,14 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# pycache file
+api/__pycache__/*
+api/v1/__pycache__/*
+api/model/__pycache__/*
+api/v1/views/__pycache__/*
+api/v1/controllers/__pycache__/*
+api/v1/auth/__pycache__/*
+
+# sqlite db
+refitinco.db

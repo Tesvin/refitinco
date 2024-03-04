@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """a module for mail sender"""
 from flask_mail import Message, Mail
-from api.v1.views import jsonify, current_app, app_views
+from api.v1.views import jsonify, current_app
 
 
 def send_mail(receiver):

@@ -9,7 +9,6 @@ from api.v1.config import Config
 
 
 app = Flask(__name__)
-config_name = ''
 app.config.from_object(Config)
 Config.init_app(app)
 mail = Mail()

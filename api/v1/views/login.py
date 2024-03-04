@@ -2,7 +2,7 @@
 """views"""
 from flask import jsonify, abort, redirect, request
 from api.v1.auth.auth import Auth
-from model.user import User
+from api.model.user import User
 from api.v1.views import app_views
 
 AUTH = Auth()

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """a module that handles registration"""
 from flask import request, abort, jsonify
-from model.user import User
+from api.model.user import User
 from api.v1.auth.auth import Auth
 from api.v1.controllers.mailer import send_mail
 from api.v1.views import app_views
@@ -23,6 +23,8 @@ def register():
         response, status_code = send_mail(data['email'])
         if status_code == 500:
             abort(400, response)
+       # if data['referral']:
+       #     AUTH.refer_users()
         AUTH.register_user(**data)
         email = data['email']
     except ValueError:

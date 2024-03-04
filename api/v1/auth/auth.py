@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """a module that handle authentication"""
 import bcrypt
-from db import DB
-import uuid
+from api.v1.db import DB
+from uuid import uuid4
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
-from model.user import User
+from api.model.user import User
 
 
 def _hash_password(password: str) -> str:
@@ -14,7 +14,7 @@ def _hash_password(password: str) -> str:
 
 def _generate_uuid() -> str:
     """a method that generate uuid"""
-    return str(uuid.uuid4())
+    return str(uuid4())
 
 
 class Auth:
@@ -35,6 +35,7 @@ class Auth:
         except (InvalidRequestError, NoResultFound):
             pwd = _hash_password(password)
             kwargs['password'] = pwd
+            kwargs['refer_code'] = str(uuid4())
             user = self._db.add_user(**kwargs)
             return user
         
