@@ -23,10 +23,13 @@ def register():
         response, status_code = send_mail(data['email'])
         if status_code == 500:
             abort(400, response)
-       # if data['referral']:
-       #     AUTH.refer_users()
-        AUTH.register_user(**data)
+        member = AUTH.register_user(**data)
         email = data['email']
+        refer = data.get('referral')
+        if refer:
+            print(member)
+            data['user_id'] = member.id
+            AUTH.refer_users(**data)
     except ValueError:
         return jsonify({'message': 'email already registered'}), 400
     return jsonify({'email': email, 'message': 'User registered'})

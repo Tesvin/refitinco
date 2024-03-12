@@ -98,3 +98,12 @@ class Auth:
                 user.reset_token = None
             except NoResultFound:
                 raise ValueError
+            
+        def refer_users(**kwargs):
+            """a method that register downlines"""
+            try:
+                user = self._db.find_user_by(refer_code=)
+                for key, value in kwargs.items():
+                    setattr(self, key, value)
+            except NoResultFound:
+                raise ValueError

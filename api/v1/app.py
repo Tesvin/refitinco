@@ -5,10 +5,13 @@ from flask_cors import CORS
 from flask_mail import Mail
 from api.v1.config import Config
 from api.v1.views import app_views
-from api.v1.config import Config
+from os import getenv
+from dotenv import load_dotenv
 
 
+load_dotenv()
 app = Flask(__name__)
+config_name = getenv('config_name')
 app.config.from_object(Config)
 Config.init_app(app)
 mail = Mail()

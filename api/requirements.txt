@@ -1,12 +1,14 @@
 automium==0.2.6
 automium_web==0.1.1
 bcrypt==4.1.2
+blinker==1.7.0
 certifi==2024.2.2
 chardet==3.0.4
 click==8.1.7
 colorama==0.4.6
 Flask==1.1.2
 Flask-Cors==3.0.8
+Flask-Mail==0.9.1
 greenlet==3.0.3
 idna==2.6
 itsdangerous==1.1.0
@@ -14,6 +16,7 @@ Jinja2==2.11.2
 legacy==0.1.7
 MarkupSafe==2.0.0
 pycodestyle==2.6.0
+python-dotenv==1.0.1
 requests==2.18.4
 six==1.16.0
 SQLAlchemy==2.0.27
