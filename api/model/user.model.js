@@ -18,6 +18,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    parent_refer: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    token: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    refer_code: {
+        type: String,
+        required: true,
+    }
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

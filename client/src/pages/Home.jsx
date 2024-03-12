@@ -1,31 +1,37 @@
 import { Link } from 'react-router-dom'
 import Ref1 from '../assets/Ref1.jpg'
-import Ref2 from '../assets/Ref2.jpg'
 import ScrollingIcons from '../components/ScrollingIcons'
+import FAQ from '../components/Faq'
+
 
 export default function Home() {
   return (
     <div className="">
-        <h1 className="p-4 text-center text-2xl font-bold">
+        <h1 className="p-4 font-sans text-center text-2xl font-bold">
             <span>Crowdfund To Co-own A Tech Start-Up Today!!!</span>
         </h1>
         <nav className="bg-green-900 p-2 m-6">
-            <h1 className="p-4 text-center text-white text-2xl font-bold">ARE YOU READY TO HARNESS</h1>
+            <h1 className="p-4 text-center text-white text-2xl font-bold font-sans">ARE YOU READY TO HARNESS</h1>
         </nav>
         <div className='sm:flex m-4 flex-col-reverse'>
-          <div>
-            <img src={Ref1} alt='crowd'/>
+          
+          <div className='flex w-full flex-col'>
+            <div className='mx-auto h-1/2'>
+              <img src={Ref1} alt='crowd' className='object-contain'/>
+            </div>
+            <div className='md:container mx-auto'>
+              <FAQ />
+            </div>
           </div>
           <div className='p-6 font-bold text-center'>
-            <h2>THE POWER</h2>
-            <h3>OF THE INTERNET?!!!</h3>
-            <Link to='/sign-in'>
-              <h1 className='bg-green-700 cursor-pointer border p-2 text-white rounded-lg'>Purchase Units Now</h1>
-            </Link>
+            <div className='md:flex flex-col items-center font-sans'>
+              <h2>THE POWER</h2>
+              <h3>OF THE INTERNET?!!!</h3>
+              <Link to='/sign-in'>
+                <h1 className='bg-green-700 cursor-pointer border p-2 text-white rounded-lg'>Purchase Units Now</h1>
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className='item-center'>
-          {/* <ScrollingIcons /> */}
         </div>
     </div>
   )
