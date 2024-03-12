@@ -12,19 +12,16 @@ export default function Home() {
         <nav className="bg-green-900 p-2 m-6">
             <h1 className="p-4 text-center text-white text-2xl font-bold">ARE YOU READY TO HARNESS</h1>
         </nav>
-        <div className='sm:flex m-4'>
+        <div className='sm:flex m-4 flex-col-reverse'>
           <div>
             <img src={Ref1} alt='crowd'/>
           </div>
           <div className='p-6 font-bold text-center'>
             <h2>THE POWER</h2>
             <h3>OF THE INTERNET?!!!</h3>
-            <Link to='#'>
+            <Link to='/sign-in'>
               <h1 className='bg-green-700 cursor-pointer border p-2 text-white rounded-lg'>Purchase Units Now</h1>
             </Link>
-          </div>
-          <div>
-            <img src={Ref2} alt='$25 per Unit'/>
           </div>
         </div>
         <div className='item-center'>

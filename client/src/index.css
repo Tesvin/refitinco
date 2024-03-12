@@ -11,7 +11,7 @@
 }
 
 .input_style {
-  @apply border p-3 rounded-lg placeholder:text-slate-300 placeholder:font-semibold
+  @apply border p-3 rounded-lg placeholder:text-slate-300 placeholder:font-medium
 }
 
 @tailwind utilities;

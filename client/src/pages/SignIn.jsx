@@ -49,13 +49,14 @@ export default function SignIn() {
       <h1 className="text-green-900 text-3xl text-center font-bold my-7">
         Sign In
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <p className="text-sm text-gray-500 mx-auto">Welcome back! Please log in using the details you entered during registration.</p>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
         <div className="relative flex flex-col pt-3">
           <label htmlFor="email" className="font-semibold text-green-700 absolute bg-white left-3 top-0">Email</label>
           <input
             type="email"
-            placeholder="Your answer"
-            className="border p-3 rounded-lg placeholder:text-gray-500 placeholder:font-semibold"
+            placeholder="e.g example@domainname.com"
+            className="border p-3 rounded-lg placeholder:text-gray-400 placeholder:font-medium"
             id="email"
             required
             onChange={handleChange}
@@ -66,13 +67,13 @@ export default function SignIn() {
           <label htmlFor="password" className="font-semibold text-green-700 absolute bg-white left-3 top-0">Password</label>
           <input
             type="password"
-            placeholder="Your answer"
-            className="border p-3 rounded-lg placeholder:text-gray-500 placeholder:font-semibold"
+            placeholder="Enter password"
+            className="border p-3 rounded-lg placeholder:text-gray-400 placeholder:font-medium"
             id="password"
             required
             onChange={handleChange}
           />
-          <small className="text-right font-semibold text-blue-600 underline"><Link to={'/forget'}>Forget password?</Link> </small>
+          <small className="text-right font-semibold text-green-700"><Link to={'/forget'}>Forget password?</Link> </small>
         </div>
         
 
