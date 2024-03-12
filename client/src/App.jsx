@@ -11,6 +11,7 @@ import Buy from "./components/Buy";
 import Flutterwave from "./components/Flutterwave";
 import Profile from "./pages/Profile";
 import Wallet from "./components/Wallet"
+import Forget from "./pages/Forget";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
       <Route path="sign-up" element={<SignUp />}/>
       <Route path="about" element={<About />}/>
       <Route path="buy" element={<Buy />}/>
+      <Route path="forget" element={<Forget />} />
       
       <Route element={<PrivateRoute />}>
         <Route path="Profile" element={<Profile />}/>

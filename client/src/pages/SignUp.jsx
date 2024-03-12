@@ -44,39 +44,67 @@ export default function SignUp() {
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-green-900 text-3xl text-center font-bold my-7">Sign Up</h1>
-      <form onSubmit={handleSubmit} 
-      className="flex flex-col gap-4">
-        <input
-          type="text"
-          placeholder="firstname"
-          className="border p-3 rounded-lg"
-          id="firstname"
-          onChange={handleChange}
-        />
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="relative flex flex-col pt-3">
+          <label htmlFor="firstname" className="label_style">First Name</label>
+          <input
+            type="text"
+            placeholder="Your answer"
+            className="input_style"
+            id="firstname"
+            required
+            onChange={handleChange}
+          />
+        </div>
         
-        <input
-          type="text"
-          placeholder="lastname"
-          className="border p-3 rounded-lg"
-          id="lastname"
-          onChange={handleChange}
-        />
+        <div className="relative flex flex-col pt-3">
+          <label htmlFor="lastname" className="label_style">Last Name</label>
+          <input
+            type="text"
+            placeholder="Your answer"
+            className="input_style"
+            id="lastname"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        
 
-        <input
-          type="email"
-          placeholder="email"
-          className="border p-3 rounded-lg"
-          id="email"
-          onChange={handleChange}
-        />
+        <div className="flex flex-col relative pt-3">
+          <label htmlFor="email" className="label_style">Email</label>
+          <input
+            type="email"
+            placeholder="Your answer"
+            className="input_style"
+            id="email"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        
+        <div className="relative flex flex-col pt-3">
+          <label htmlFor="password" className="label_style">Password</label>
+            <input
+            type="password"
+            placeholder="password"
+            className="input_style"
+            id="password"
+            required
+            onChange={handleChange}
+          />
+        </div>
 
-        <input
-          type="password"
-          placeholder="password"
-          className="border p-3 rounded-lg"
-          id="password"
-          onChange={handleChange}
-        />
+        <div className="relative flex flex-col pt-3">
+          <label htmlFor="refer" className="label_style">Referral</label>
+            <input
+            type="text"
+            placeholder="Optional"
+            className="input_style"
+            id="refer"
+            onChange={handleChange}
+          />
+        </div>
+      
         
         <button
           disabled={loading}
