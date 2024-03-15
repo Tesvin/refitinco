@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  signInStart,
-  signInSuccess,
-  signInFailure,
+ forgetStart,
+ forgetSuccess,
+ forgetFailure,
 } from "../redux/user/userSlice";
 
 export default function Forget() {
@@ -23,8 +23,8 @@ export default function Forget() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(signInStart());
-      const res = await fetch("/api/auth/signin", {
+      dispatch(forgetStart());
+      const res = await fetch("/api/auth/reset_password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,13 +34,13 @@ export default function Forget() {
       const data = await res.json();
       console.log(data);
       if (data.success === false) {
-        dispatch(signInFailure(data.message));
+        dispatch(forgetFailure(data.message));
         return;
       }
-      dispatch(signInSuccess(data));
-      navigate("/");
+      dispatch(forgetSuccess(data));
+      navigate("/forget");
     } catch (error) {
-      dispatch(signInFailure(error.message));
+      dispatch(forgetFailure(error.message));
     }
   };
 

@@ -24,7 +24,7 @@ export default function App() {
       <Route path="sign-up" element={<SignUp />}/>
       <Route path="about" element={<About />}/>
       <Route path="buy" element={<Buy />}/>
-      {/*<Route path="forget" element={<Forget />} /> */}
+      <Route path="forget" element={<Forget />} />
       <Route path="forget-password" element={<ForgetPassword />} />
       
       <Route element={<PrivateRoute />}>
