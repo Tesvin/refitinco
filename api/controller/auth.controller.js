@@ -3,6 +3,7 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from 'uuid';
+import { ObjectId } from 'mongodb';
 
 export const signup = async (req, res, next) => {
   const { firstname, lastname, email, password, refer } = req.body;
@@ -11,7 +12,7 @@ export const signup = async (req, res, next) => {
     return res.status(400).json({error: 'Missing field'})
   }
   const user = await User.findOne({ email });
-  if (user) return next(errorHandler(401, 'User already exist'));
+  if (user) return next(errorHandler(401, 'Your email already exist'));
   const hashedPassword = bcryptjs.hashSync(password, 10);
   if (refer) {
     const parentId = await User.findOne({ parent_refer: refer })
@@ -67,3 +68,15 @@ export const signOut = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getResetToken = async (req, res, next) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({error: 'Missing field'})
+  }
+  const user = await User.findOne({ email });
+  if (!user) return next(errorHandler(401, 'Not a member'));
+  await User.updateOne({ _id: ObjectId(user.id) }, { $set: { refer_code: uuidv4() }});
+
+}

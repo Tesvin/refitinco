@@ -70,6 +70,18 @@ const userSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
+        forgetStart: (state) => {
+            state.loading = true;
+        },
+        forgetSuccess: (state, action) => {
+            state.currentUser = action.payload;
+            state.loading = false;
+            state.error = null;
+        },
+        forgetFailure: (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        }
     },
 });
 
@@ -88,7 +100,10 @@ export const {
     signOutUserFailure,
     paymentStart,
     paymentSuccess,
-    paymentFailure
+    paymentFailure,
+    forgetSuccess,
+    forgetStart,
+    forgetFailure
 } = userSlice.actions;
 
 export default userSlice.reducer
