@@ -87,7 +87,7 @@ export default function SignUp() {
             <input
             type="password"
             placeholder="password"
-            className="input_style"
+            className="input_style "
             id="password"
             required
             onChange={handleChange}
