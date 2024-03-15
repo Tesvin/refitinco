@@ -10,6 +10,8 @@ export const signup = async (req, res, next) => {
   if (!firstname || !lastname || !email || !password) {
     return res.status(400).json({error: 'Missing field'})
   }
+  const user = User.findOne({ email });
+  if (user) return res.status(401).json({error: 'User already exist'})
   const hashedPassword = bcryptjs.hashSync(password, 10);
   if (refer) {
     const parentId = User.findOne({ _parent_refer: refer })
