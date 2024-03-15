@@ -96,7 +96,8 @@ export default function SignUp() {
 
         <div className="relative flex flex-col pt-3">
           <label htmlFor="refer" className="label_style">Referral</label>
-            <input
+          <input
+            name="refer"
             type="text"
             placeholder="Optional"
             className="input_style"

@@ -7,14 +7,14 @@ import { v4 as uuidv4 } from 'uuid';
 export const signup = async (req, res, next) => {
   const { firstname, lastname, email, password, refer } = req.body;
 
-  if (!firstname || !lastname || !email || !password) {
+  if (!firstname && !lastname && !email && !password) {
     return res.status(400).json({error: 'Missing field'})
   }
-  const user = User.findOne({ email });
-  if (user) return res.status(401).json({error: 'User already exist'})
+  const user = await User.findOne({ email });
+  if (user) return next(errorHandler(401, 'User already exist'));
   const hashedPassword = bcryptjs.hashSync(password, 10);
   if (refer) {
-    const parentId = User.findOne({ _parent_refer: refer })
+    const parentId = await User.findOne({ parent_refer: refer })
   }
   const newUser = new User({
     firstname,
