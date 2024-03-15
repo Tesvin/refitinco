@@ -72,12 +72,19 @@ export const signOut = async (req, res, next) => {
 export const getResetToken = async (req, res, next) => {
   const { email } = req.body;
 
-  if (!email) {
-    return res.status(400).json({error: 'Missing field'})
-  }
+  if (!email) return next(errorHandler(400, 'Missing field'));
   const user = await User.findOne({ email });
   if (!user) return next(errorHandler(401, 'Not a member'));
   const token = uuidv4()
   await User.updateOne({ _id: ObjectId(user.id) }, { $set: { refer_code: token }});
-  res.status(200).json({});
+  res.status(200).json({ 'email': email, 'reset_token': token });
+}
+
+export const updatePassword = async (req, res, next) => {
+  const { email, password, reset_token } = req.body;
+  if (!email) return next(errorHandler(400, 'Missing email'));
+  if (!password) return next(errorHandler(400, 'Missing password'));
+  const hashedPassword = bcryptjs.hashSync(password, 10);
+  await User.updateOne({ email }, { $set: { password: hashedPassword } });
+  res.status(200).json("Password updated successfully");
 }

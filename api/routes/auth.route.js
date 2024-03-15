@@ -7,6 +7,7 @@ router.post('/signup', signup);
 router.post('/signin', signin);
 router.get("/signout", signOut);
 router.post('/reset_password', getResetToken);
+router.put('/reset_password', updatePassword);
 router.post('/generateOTP', generateOTP);
 
 
