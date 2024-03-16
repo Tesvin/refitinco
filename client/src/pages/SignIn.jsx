@@ -37,6 +37,7 @@ export default function SignIn() {
       console.log(data);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
+        setError(error.message)
         return;
       }
       dispatch(signInSuccess(data));
@@ -45,6 +46,7 @@ export default function SignIn() {
       dispatch(signInFailure(error.message));
       setError(error.message)
     }
+    console.log(error)
   };
 
   return (
