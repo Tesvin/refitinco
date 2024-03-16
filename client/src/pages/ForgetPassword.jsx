@@ -23,7 +23,7 @@ export default function ForgetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(forgetStart(data));
+      dispatch(forgetStart());
       const res = await fetch("/api/auth/reset_password", {
         method: "POST",
         headers: {
