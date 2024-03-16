@@ -73,7 +73,7 @@ export default function SignIn() {
             required
             onChange={handleChange}
           />
-          <small className="text-right font-semibold text-green-700"><Link to={'/forget'}>Forget password?</Link> </small>
+          <small className="text-right font-semibold text-green-700"><Link to={'/forget-password'}>Forget password?</Link> </small>
         </div>
         
 
