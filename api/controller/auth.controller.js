@@ -86,5 +86,5 @@ export const updatePassword = async (req, res, next) => {
   if (!password) return next(errorHandler(400, 'Missing password'));
   const hashedPassword = bcryptjs.hashSync(password, 10);
   await User.updateOne({ email }, { $set: { password: hashedPassword } });
-  res.status(200).json("Password updated successfully");
+  return res.status(200).json("Password updated successfully");
 }

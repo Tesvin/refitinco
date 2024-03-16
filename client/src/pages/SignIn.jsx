@@ -9,7 +9,8 @@ import {
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const [error, setError] = useState('');
+  const { loading } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,6 +21,7 @@ export default function SignIn() {
     });
   };
 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -38,9 +40,10 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       dispatch(signInFailure(error.message));
+      setError(error.message)
     }
   };
 
@@ -50,7 +53,7 @@ export default function SignIn() {
         Sign In
       </h1>
       <p className="text-sm text-gray-500 mx-auto">Welcome back! Please log in using the details you entered during registration.</p>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
+      <form onSubmit={() => handleSubmit} className="flex flex-col gap-4 mt-2">
         <div className="relative flex flex-col pt-3">
           <label htmlFor="email" className="font-medium text-green-700 absolute bg-white left-3 top-0">Email</label>
           <input
