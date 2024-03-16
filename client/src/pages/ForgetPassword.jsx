@@ -39,7 +39,6 @@ export default function ForgetPassword() {
         setError(data.message)
         return;
       }
-      console.log(data);
       dispatch(forgetSuccess(data));
       navigate("/forget");
     } catch (error) {
@@ -61,6 +60,7 @@ export default function ForgetPassword() {
             placeholder="e.g example@domainname.com"
             className="border p-3 rounded-lg placeholder:text-gray-500 placeholder:font-base"
             id="email"
+            required
             onChange={handleChange}
           />
         </div>
