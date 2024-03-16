@@ -34,10 +34,10 @@ export default function SignIn() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
-        setError(error.message)
+        setError(error.message);
         return;
       }
       dispatch(signInSuccess(data));
@@ -46,7 +46,6 @@ export default function SignIn() {
       dispatch(signInFailure(error.message));
       setError(error.message)
     }
-    console.log(error)
   };
 
   return (
@@ -96,6 +95,7 @@ export default function SignIn() {
         </Link>
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}
+      {console.log(error)}
     </div>
   );
 }
