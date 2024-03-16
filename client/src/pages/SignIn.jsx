@@ -55,7 +55,7 @@ export default function SignIn() {
         Sign In
       </h1>
       <p className="text-sm text-gray-500 mx-auto">Welcome back! Please log in using the details you entered during registration.</p>
-      <form onSubmit={() => handleSubmit} className="flex flex-col gap-4 mt-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
         <div className="relative flex flex-col pt-3">
           <label htmlFor="email" className="font-medium text-green-700 absolute bg-white left-3 top-0">Email</label>
           <input
