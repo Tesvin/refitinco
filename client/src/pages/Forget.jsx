@@ -13,6 +13,7 @@ export default function Forget() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  console.log(currentUser)
   const handleChange = (e) => {
     setFormData({
       ...formData,

@@ -5,6 +5,9 @@ import {
   signInStart,
   signInSuccess,
   signInFailure,
+  forgetFailure,
+  forgetSuccess,
+  forgetStart,
 } from "../redux/user/userSlice";
 
 export default function ForgetPassword() {
@@ -23,8 +26,8 @@ export default function ForgetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(signInStart());
-      const res = await fetch("/api/auth/signin", {
+      dispatch(forgetStart());
+      const res = await fetch("/api/auth/reset_password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,13 +37,13 @@ export default function ForgetPassword() {
       const data = await res.json();
       console.log(data);
       if (data.success === false) {
-        dispatch(signInFailure(data.message));
+        dispatch(forgetFailure(data.message));
         return;
       }
-      dispatch(signInSuccess(data));
+      dispatch(forgetSuccess(data));
       navigate("/forget");
     } catch (error) {
-      dispatch(signInFailure(error.message));
+      dispatch(forgetFailure(error.message));
     }
   };
 
