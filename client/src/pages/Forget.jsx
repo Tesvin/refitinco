@@ -40,7 +40,7 @@ export default function Forget() {
         return;
       }
       dispatch(forgetSuccess(data));
-      navigate("/forget");
+      navigate("/login");
     } catch (error) {
       dispatch(forgetFailure(error.message));
     }

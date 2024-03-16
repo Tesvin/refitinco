@@ -38,7 +38,7 @@ export default function ForgetPassword() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/");
+      navigate("/forget");
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
