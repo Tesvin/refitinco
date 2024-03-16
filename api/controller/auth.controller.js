@@ -74,10 +74,11 @@ export const getResetToken = async (req, res, next) => {
 
   if (!email) return next(errorHandler(400, 'Missing field'));
   const user = await User.findOne({ email });
+  return res.json(user);
   if (!user) return next(errorHandler(401, 'Not a member'));
   const token = uuidv4()
-  await User.updateOne({ _id: ObjectId(user.id) }, { $set: { refer_code: token }});
-  res.status(200).json({ 'email': email, 'reset_token': token });
+  await User.updateOne({ _id: ObjectId(user._id) }, { $set: { refer_code: token }});
+  return res.status(200).json({ 'email': email, 'reset_token': token });
 }
 
 export const updatePassword = async (req, res, next) => {
