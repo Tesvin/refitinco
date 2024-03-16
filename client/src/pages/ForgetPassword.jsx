@@ -9,7 +9,8 @@ import {
 
 export default function ForgetPassword() {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.user);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,12 +36,14 @@ export default function ForgetPassword() {
       console.log(data);
       if (data.success === false) {
         dispatch(forgetFailure(data.message));
+        setError(data.message)
         return;
       }
       dispatch(forgetSuccess(data));
       navigate("/forget");
     } catch (error) {
       dispatch(forgetFailure(error.message));
+      setError(error.message)
     }
   };
 
