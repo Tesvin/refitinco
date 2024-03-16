@@ -37,6 +37,7 @@ export default function ForgetPassword() {
         dispatch(forgetFailure(data.message));
         return;
       }
+      console.log(data);
       dispatch(forgetSuccess(data));
       navigate("/forget");
     } catch (error) {
