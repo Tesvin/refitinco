@@ -4,6 +4,7 @@ import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from 'uuid';
 import { Types } from "mongoose";
+import { ObjectId } from 'mongodb';
 
 
 export const signup = async (req, res, next) => {
@@ -78,7 +79,7 @@ export const getResetToken = async (req, res, next) => {
     const user = await User.findOne({ 'email': email });
     if (!user) return next(errorHandler(401, 'Not a member'));
     const token = uuidv4();
-    await User.updateOne({ _id: Types.ObjectId(user._id) }, { $set: { refer_code: token }});
+    await User.updateOne({ _id: new ObjectId(user._id) }, { $set: { refer_code: token }});
     return res.status(200).json({ 'email': email, 'reset_token': token });
   } catch (error) {
     next(error);
