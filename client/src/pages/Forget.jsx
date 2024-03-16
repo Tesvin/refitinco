@@ -9,7 +9,7 @@ import {
 
 export default function Forget() {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,6 +17,8 @@ export default function Forget() {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
+      email: currentUser.email,
+      reset_token: currentUser.reset_token,
     });
   };
 
@@ -25,7 +27,7 @@ export default function Forget() {
     try {
       dispatch(forgetStart());
       const res = await fetch("/api/auth/reset_password", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
