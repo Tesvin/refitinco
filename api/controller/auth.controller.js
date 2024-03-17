@@ -77,7 +77,7 @@ export const getResetToken = async (req, res, next) => {
     const user = await User.findOne({ 'email': email });
     if (!user) return next(errorHandler(401, 'Not a member'));
     const token = uuidv4();
-    await User.updateOne({ email: user.email }, { refer_code: token });
+    //await User.updateOne({ email: user.email }, { refer_code: token });
     return res.status(200).json({ 'email': email, 'reset_token': token });
   } catch (error) {
     next(error);
