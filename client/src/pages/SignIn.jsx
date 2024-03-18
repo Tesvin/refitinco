@@ -9,7 +9,8 @@ import {
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const [error, setError] = useState('');
+  const { loading } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,6 +21,7 @@ export default function SignIn() {
     });
   };
 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -35,41 +37,52 @@ export default function SignIn() {
       console.log(data);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
+        setError(data.message);
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       dispatch(signInFailure(error.message));
+      setError(error.message)
     }
   };
 
   return (
-    <div className=" p-3 max-w-lg mx-auto">
+    <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-green-900 text-3xl text-center font-bold my-7">
         Sign In
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          type="email"
-          placeholder="Email"
-          className="border p-3 rounded-lg"
-          id="email"
-          required
-          onChange={handleChange}
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          className="border p-3 rounded-lg"
-          id="password"
-          required
-          onChange={handleChange}
-        />
-        <small className="text-right mt-0 underline">
-          <Link to={'/forget'}>Forget password?</Link>
-        </small>
+      <marquee direction="left">
+         <p className="font-semibold font-sans">Top 5 investors and earn a seat in the boardroom...</p>
+      </marquee>
+      <p className="text-sm text-gray-500 mx-auto">Welcome back! Please log in using the details you entered during registration.</p>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
+        <div className="relative flex flex-col pt-3">
+          <label htmlFor="email" className="font-medium text-green-700 absolute bg-white left-3 top-0">Email</label>
+          <input
+            type="email"
+            placeholder="e.g example@domainname.com"
+            className="border p-3 rounded-lg placeholder:text-gray-400 placeholder:font-base"
+            id="email"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        
+        <div className="relative flex flex-col pt-3">
+          <label htmlFor="password" className="font-medium text-green-700 absolute bg-white left-3 top-0">Password</label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            className="border p-3 rounded-lg placeholder:text-gray-400 placeholder:font-base"
+            id="password"
+            required
+            onChange={handleChange}
+          />
+          <small className="text-right font-semibold text-green-700"><Link to={'/forget-password'}>Forget password?</Link> </small>
+        </div>
+        
 
         <button
           disabled={loading}
@@ -79,7 +92,7 @@ export default function SignIn() {
         </button>
       </form>
       <div className="flex gap-2 mt-5">
-        <p className="text-black">Have an account?</p>
+        <p className="text-black">Don&apos;t have an account?</p>
         <Link to={"/sign-up"}>
           <span className="text-[#0a192f] font-bold">Sign up</span>
         </Link>

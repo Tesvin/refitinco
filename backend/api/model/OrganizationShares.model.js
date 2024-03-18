@@ -5,11 +5,11 @@ const organizationSharesSchema = new mongoose.Schema(
   {
     totalSharesInOrganization: {
       type: Number,
-      default: 9000,
+      default: 15000,
     },
     remainingSharesInOrganization: {
       type: Number,
-      default: 9000,
+      default: 15000,
     },
     totalSharesBoughtByUsers: {
         type: Number,

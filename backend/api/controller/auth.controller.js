@@ -2,11 +2,31 @@ import User from "../model/user.model.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from 'uuid';
+import { Types } from "mongoose";
+import { ObjectId } from 'mongodb';
+
 
 export const signup = async (req, res, next) => {
-  const { firstname, lastname, email, password } = req.body;
+  const { firstname, lastname, email, password, refer } = req.body;
+
+  if (!firstname && !lastname && !email && !password) {
+    return res.status(400).json({error: 'Missing field'})
+  }
+  const user = await User.findOne({ email });
+  if (user) return next(errorHandler(401, 'Your email already exist'));
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  const newUser = new User({ firstname, lastname, email, password: hashedPassword });
+  if (refer) {
+    const parentId = await User.findOne({ parent_refer: refer })
+  }
+  const newUser = new User({
+    firstname,
+    lastname,
+    email,
+    password: hashedPassword,
+    parent_refer: refer || '',
+    refer_code: uuidv4()
+   });
   try {
     await newUser.save();
     res.status(201).json("User created successfully");
@@ -18,11 +38,12 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
+  if (!email || !password) return res.status(400).json({error: 'Missing field'})
   try {
     const validUser = await User.findOne({ email });
-    if (!validUser) return next(errorHandler(401, "Wrong credentials!"));
+    if (!validUser) return next(errorHandler(401, "Not a member!"));
     const validPassword = bcryptjs.compareSync(password, validUser.password);
-    if (!validPassword) return next(errorHandler(401, "Wrong credentials!"));
+    if (!validPassword) return next(errorHandler(400, "Incorrect password!"));
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
     res
@@ -43,9 +64,33 @@ export const generateOTP = async (req, res, next) => {
 
 export const signOut = async (req, res, next) => {
   try {
-    res.clearCookie('a`ccess_token');
+    res.clearCookie('access_token');
     res.status(200).json('User has been logged out!');
   } catch (error) {
     next(error);
   }
 };
+
+export const getResetToken = async (req, res, next) => {
+  const { email } = req.body;
+
+  if (!email) return next(errorHandler(400, 'Missing field'));
+  try {
+    const user = await User.findOne({ 'email': email });
+    if (!user) return next(errorHandler(401, 'Not a member'));
+    const token = uuidv4();
+    //await User.updateOne({ email: user.email }, { $set: { refer_code: token }});
+    return res.status(200).json({ 'email': email, 'reset_token': token });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export const updatePassword = async (req, res, next) => {
+  const { email, password, reset_token } = req.body;
+  if (!email) return next(errorHandler(400, 'Missing email'));
+  if (!password) return next(errorHandler(400, 'Missing password'));
+  const hashedPassword = bcryptjs.hashSync(password, 10);
+  await User.updateOne({ email }, { $set: { password: hashedPassword } });
+  return res.status(200).json("Password updated successfully");
+}

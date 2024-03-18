@@ -1,8 +1,17 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+
 
 /* body{
   background-color: rgb(33, 24, 31);
 } */
 
+.label_style {
+  @apply font-semibold text-green-700 absolute bg-white left-3 top-0
+}
+
+.input_style {
+  @apply border p-3 rounded-lg placeholder:text-slate-300 placeholder:font-medium
+}
+
+@tailwind utilities;

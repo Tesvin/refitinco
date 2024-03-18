@@ -7,12 +7,12 @@ import Dashboard from "./pages/Dashboard"
 import About from "./pages/About";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Footer from "./components/Footer";
-// import Buy from "./components/Buy";
+import Buy from "./components/Buy";
 import Flutterwave from "./components/Flutterwave";
 import Profile from "./pages/Profile";
 import Wallet from "./components/Wallet"
 import Forget from "./pages/Forget";
-import NotFoundPage from "./pages/NotFound";
+import ForgetPassword from "./pages/ForgetPassword";
 
 export default function App() {
   return (
@@ -23,8 +23,9 @@ export default function App() {
       <Route path="sign-in" element={<SignIn />}/>
       <Route path="sign-up" element={<SignUp />}/>
       <Route path="about" element={<About />}/>
-      <Route path="/forget" element={<Forget />}/>
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="buy" element={<Buy />}/>
+      <Route path="forget" element={<Forget />} />
+      <Route path="forget-password" element={<ForgetPassword />} />
       
       <Route element={<PrivateRoute />}>
         <Route path="Profile" element={<Profile />}/>
