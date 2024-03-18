@@ -17,7 +17,7 @@ export default function Header() {
         <div>
           <Link to="/">
             <h1 className="font-bold text-sm sm:text-xl flex flex-wrap ">
-              <span className="text-white">Refitinco</span>
+              <span className="text-white">Refitinco Solutions</span>
             </h1>
           </Link>
         </div>

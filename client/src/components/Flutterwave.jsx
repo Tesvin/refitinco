@@ -10,14 +10,14 @@ export default function Flutterwave() {
   //const [loading, setLoading] = useState(false);
 
   // Calculate amount based on unit
-  const amount = unit * 25;
+  const amount = unit * 25000;
 
   const config = {
     public_key: "FLWPUBK-0526094f1d594f047a3d9f4495797780-X",
     //public_key: "FLWPUBK_TEST-cea6d3cd00566846c47c63eed72efd1f-X",
     tx_ref: Date.now(),
     amount: amount,
-    currency: "USD",
+    currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
 
     // specified redirect URL
@@ -50,7 +50,6 @@ export default function Flutterwave() {
           type="number"
           placeholder="Unit"
           value={unit}
-          required
           onChange={(e) => setUnit(e.target.value)}
         />
         <input
@@ -88,9 +87,7 @@ export default function Flutterwave() {
                 console.log(response);
                 closePaymentModal();
               },
-              onClose: () => {
-                window.location.href = "/dashboard";
-              },
+              onClose: () => {},
             })
           }
         >

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Ref1 from '../assets/Ref1.jpg'
 import ScrollingIcons from '../components/ScrollingIcons'
 import FAQ from '../components/Faq'
+import SignIn from './SignIn'
 
 
 export default function Home() {
@@ -13,12 +14,16 @@ export default function Home() {
         <nav className="bg-green-900 p-2 m-6">
             <h1 className="p-4 text-center text-white text-2xl font-bold font-sans">ARE YOU READY TO HARNESS</h1>
         </nav>
-        <div className='sm:flex m-4 flex-col-reverse'>
+        <div className='flex m-4 flex-col-reverse'>
           
           <div className='flex w-full flex-col'>
-            <div className='mx-auto h-1/2'>
-              <img src={Ref1} alt='crowd' className='object-contain'/>
+            <div className='flex flex-col md:flex-row items-center justify-between'>
+               <div className='mx-auto w-3/6 md:w-2/5'>
+                  <img src={Ref1} alt='crowd' className=''/>
+              </div>
+              <SignIn />
             </div>
+           
             <div className='md:container mx-auto'>
               <FAQ />
             </div>

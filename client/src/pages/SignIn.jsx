@@ -49,10 +49,13 @@ export default function SignIn() {
   };
 
   return (
-    <div className=" p-3 max-w-lg mx-auto">
+    <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-green-900 text-3xl text-center font-bold my-7">
         Sign In
       </h1>
+      <marquee direction="left">
+         <p className="font-semibold font-sans">Top 5 investors and earn a seat in the boardroom...</p>
+      </marquee>
       <p className="text-sm text-gray-500 mx-auto">Welcome back! Please log in using the details you entered during registration.</p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
         <div className="relative flex flex-col pt-3">
@@ -89,7 +92,7 @@ export default function SignIn() {
         </button>
       </form>
       <div className="flex gap-2 mt-5">
-        <p className="text-black">Have an account?</p>
+        <p className="text-black">Don&apos;t have an account?</p>
         <Link to={"/sign-up"}>
           <span className="text-[#0a192f] font-bold">Sign up</span>
         </Link>
