@@ -7,13 +7,13 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
-def send_mail(receiver):
+def send_mail(receiver, title, message):
     """a function that send verfication"""
     mail = Mail(current_app)
-    body = "<html><body>Welcome to Refitinco</body></html>"
+    body = message
     with mail.connect():
         msg = Message(
-            subject='Email Verification',
+            subject=title,
             sender=getenv('MAIL_USERNAME'),
             recipients=[receiver],
             html=body)

@@ -7,6 +7,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.session import Session
 from api.model.user import Base, User
+from api.model.referral import Referral
 
 
 class DB:
@@ -57,3 +58,11 @@ class DB:
         for key, value in kwargs.items():
             setattr(user, key, value)
         self._session.commit()
+
+    def add_referral(self, **kwargs) -> Referral:
+        """a method that add user"""
+        if kwargs:
+            user = Referral(**kwargs)
+            self._session.add(user)
+            self._session.commit()
+            return user

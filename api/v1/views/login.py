@@ -3,7 +3,9 @@
 from flask import jsonify, abort, redirect, request
 from api.v1.auth.auth import Auth
 from api.model.user import User
+from api.v1.controllers.mailer import send_mail
 from api.v1.views import app_views
+from .info import passwordmessage
 
 AUTH = Auth()
 
@@ -44,6 +46,10 @@ def reset_password():
     email = request.form.get('email')
     try:
         token = AUTH.get_reset_password_token(email)
+        title = 'Password reset requested'
+        response, status_code = send_mail(email, title, passwordmessage)
+        if status_code == 500:
+            abort(400, response)
     except ValueError:
         abort(403)
     return jsonify({'email': email, 'reset_token': token})

@@ -6,8 +6,8 @@ from sqlalchemy import Column, String, Integer, DateTime
 
 Base = declarative_base()
 
-class User(Base):
-    """a user model"""
+class Company(Base):
+    """a company model"""
     __tablename__ = 'company'
     name = Column(String, default='Refintic')
     units = Column(Integer, nullable=False, default=15000)
