@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 from .user import User, Base
 
 
-Base = declarative_base
+Base = declarative_base()
 
 class Referral(Base):
     """referral class"""

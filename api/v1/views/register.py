@@ -11,7 +11,7 @@ from api.v1.views.info import message
 AUTH = Auth()
 
 @app_views.route('/users', methods=['POST'], strict_slashes=False)
-@app_views.route('/invites?user=<refer>', method=['POST'], strict_slashes=False)
+@app_views.route('/invites?user=<refer>', methods=['POST'], strict_slashes=False)
 def register(refer):
     """a module that register user"""
     try:

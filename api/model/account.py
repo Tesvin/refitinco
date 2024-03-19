@@ -6,7 +6,7 @@ from datetime import datetime
 
 Base = declarative_base()
 
-class Account:
+class Account(Base):
     """Account class"""
     __tablename__ = 'account'
     
