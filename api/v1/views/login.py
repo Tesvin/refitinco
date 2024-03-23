@@ -5,9 +5,18 @@ from api.v1.auth.auth import Auth
 from api.model.user import User
 from api.v1.controllers.mailer import send_mail
 from api.v1.views import app_views
-from .info import passwordmessage
+
 
 AUTH = Auth()
+
+passwordmessage = "<html>\
+<body>\
+<h2>Reset your password</h2>\
+<p> Click on the button below within the next 60 minutes\
+to reset your password for your Refintinco solution account\
+f{email}. <br> <a href='refintinco'>Reset your password</a>\
+</body>\
+</html>"
 
 @app_views.route('/login', methods=['POST'], strict_slashes=False)
 def login():

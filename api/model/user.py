@@ -16,6 +16,7 @@ class User(Base):
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
     reset_token = Column(String, nullable=True)
+    session_id = Column(String(250), nullable=False)
     refer_code = Column(String, unique=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, nullable=False)
