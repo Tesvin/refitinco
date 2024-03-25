@@ -3,8 +3,8 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from 'uuid';
-import { Types } from "mongoose";
-import { ObjectId } from 'mongodb';
+import { ObjectId } from "mongoose";
+
 
 
 export const signup = async (req, res, next) => {
@@ -78,8 +78,9 @@ export const getResetToken = async (req, res, next) => {
   try {
     const user = await User.findOne({ 'email': email });
     if (!user) return next(errorHandler(401, 'Not a member'));
+    const id = new ObjectId(user.id);
     const token = uuidv4();
-    //await User.updateOne({ email: user.email }, { $set: { refer_code: token }});
+    await User.updateOne({ id }, { $set: { refer_code: token }});
     return res.status(200).json({ 'email': email, 'reset_token': token });
   } catch (error) {
     next(error);
