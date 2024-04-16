@@ -3,36 +3,44 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 
 export default function Flutterwave() {
   const [unit, setUnit] = useState();
-  //const [amount, setAmount] = useState(0);
   const [email, setEmail] = useState("");
-  //const [name, setName] = useState("");
-  //const [phone, setPhone] = useState("");
-  //const [loading, setLoading] = useState(false);
 
-  // Calculate amount based on unit
-  const amount = unit * 25000;
+  const amount = unit * 25;
 
   const config = {
     public_key: "FLWPUBK-0526094f1d594f047a3d9f4495797780-X",
     //public_key: "FLWPUBK_TEST-cea6d3cd00566846c47c63eed72efd1f-X",
     tx_ref: Date.now(),
     amount: amount,
-    currency: "NGN",
-    payment_options: "card,mobilemoney,ussd",
+    currency: "USD",
+    payment_options: "card, mobilemoney, ussd",
 
     // specified redirect URL
-    redirect_url: "/api/transaction/response",
+    //redirect_url: "/api/transaction/response",
     //redirect_url: "https://refitinco.onrender.com/api/transaction/response",
-
+    callback: (payment) => {
+      const site = import.meta.env.VITE_API_URL;
+      const url = `${site}/api/transaction/response`;
+      const data = {
+        userId: "60f2e2e9f9b5f70015b4f2b4",
+        transactionId: payment.tx_ref,
+        email: email,
+        amount: payment.amount,
+        currency: payment.currency,
+        paymentStatus: payment.status,
+        paymentGateway: "flutterwave",
+      };
+      const res = PostRequest(url, data);
+    },
     customer: {
       email: email,
       //phone_number: phone,
       //name: name,
     },
     customizations: {
-      title: "my Payment Title",
-      description: "Payment for items in cart",
-      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+      title: "Reftinco solutions",
+      description: "Payment for share purchase",
+      logo: 'Reftinco solutions',
     },
   };
 

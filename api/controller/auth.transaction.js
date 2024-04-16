@@ -1,11 +1,10 @@
-import User from "../model/user.model.js";
-import Wallet from "../model/wallet.js";
-import WalletTransaction from "../model/wallet_transaction.js";
+import User from "../model/user.js";
+//import Wallet from "../model/wallet.js";
+//import WalletTransaction from "../model/wallet_transaction.js";
 import Transaction from "../model/transaction.js";
 import axios from "axios";
 import dotenv from 'dotenv';
-import Share from '../model/shares.model.js';
-import OrganizationShares from "../model/OrganizationShares.model.js";
+import Share from '../model/shares.js';
 
 dotenv.config();
 
@@ -13,6 +12,7 @@ dotenv.config();
 
 
 export const response = async (req, res) => {
+  /*
     const { transaction_id } = req.query;
   
     // URL with transaction ID of which will be used to confirm transaction status
@@ -28,9 +28,11 @@ export const response = async (req, res) => {
         Authorization: `${process.env.FLUTTERWAVE_V3_SECRET_KEY}`,
       },
     });
-  
+    */
+
     const { status, currency, id, amount, customer } = response.data.data;
-  
+    console.log(req.body, req.query)
+    return
     // check if transaction id already exist
   
     const transactionExist = await Transaction.findOne({ transactionId: id });
@@ -67,10 +69,9 @@ export const balance = async (req, res) => {
     try {
       const { userId } = req.params;
       //const { userId } = await Wallet.findById(req.params.userId)
-      const wallet = await Wallet.findOne({ userId });
-      //const wallet = await Wallet.findById({ userId });
-      // user
-       res.status(200).json(wallet.balance);
+      const wallet = await Share.findOne({ where: {'userId': userId} });
+      if (wallet === null) return res.status(200).json(0);
+      return res.status(200).json(wallet.units);
     } catch (err) {
       console.log(err);
     }
@@ -96,102 +97,6 @@ export const balance = async (req, res) => {
     }
   }
 
-  const validateUserWallet = async (userId) => {
-    try {
-      // check if user have a wallet, else create wallet
-      const userWallet = await Wallet.findOne({ userId });
-  
-      if (!userWallet) {
-        // create wallet
-        const wallet = await Wallet.create({
-          userId,
-        });
-        return wallet;
-      }
-      return userWallet;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-  const createWalletTransaction = async (userId, status, currency, amount) => {
-    try {
-      // create wallet transaction
-      const walletTransaction = await WalletTransaction.create({
-        amount,
-        userId,
-        isInflow: true,
-        currency,
-        status,
-      });
-      return walletTransaction;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-  const createTransaction = async (
-    userId,
-    id,
-    status,
-    currency,
-    amount,
-    customer
-  ) => {
-    try {
-      // create transaction
-      const transaction = await Transaction.create({
-        userId,
-        transactionId: id,
-        name: customer.name,
-        email: customer.email,
-        phone: customer.phone_number,
-        amount,
-        currency,
-        paymentStatus: status,
-        paymentGateway: "flutterwave",
-      });
-      return transaction;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-  const updateWallet = async (userId, amount) => {
-    try {
-      // update wallet
-      const wallet = await Wallet.findOneAndUpdate(
-        { userId },
-        { $inc: { balance: amount } },
-        { new: true }
-      );
-      return wallet;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //let totalSharesInOrganization = 9000; // Initial total share in the organization
-
-  // Initialize total shares in the organization
-
-  const initializeTotalSharesInOrganization = async () => {
-    try {
-      let organizationShares = await OrganizationShares.findOne();
-      if (!organizationShares) {
-        organizationShares = new OrganizationShares({
-          totalSharesInOrganization: 9000,
-          remainingSharesInOrganization: 9000,
-          totalSharesBoughtByUsers: 0,
-        });
-        await organizationShares.save();
-      }
-    } catch (error) {
-      console.error("Error initializing organization shares:", error);
-    }
-  };
-
-initializeTotalSharesInOrganization();
 
   export const calculateShares = async (req, res) => {
     // Calculate total amount in each user's wallet and convert to shares
@@ -223,6 +128,7 @@ initializeTotalSharesInOrganization();
 
         // Calculate total amount and convert to shares
         for (const wallet of wallets) {
+            if (wallet === null || wallet === undefined) wallet = { balance: 0 };
             const totalAmount = wallet.balance;
             const sharesBought = totalAmount / 25000;
             

@@ -1,53 +1,43 @@
-import mongoose from "mongoose";
+import { DataTypes } from "sequelize";
+import { sequelize } from "../database/connection.js";
+import User from "./user.js";
 
-const transactionSchema =new mongoose.Schema(
-  {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-    transactionId: {
-      type: Number,
-      trim: true,
-    },
-    name: {
-      type: String,
-      required: [true, "name is required"],
-      trim: true,
-    },
-    email: {
-      type: String,
-      required: [true, "email is required"],
-      trim: true,
-    },
-    phone: {
-      type: String,
-    },
-    amount: {
-      type: Number,
-      required: [true, "amount is required"],
-    },
-    currency: {
-      type: String,
-      required: [true, "currency is required"],
-      enum: ["NGN", "USD", "EUR", "GBP"],
-    },
-    paymentStatus: {
-      type: String,
-      enum: ["successful", "pending", "failed"],
-      default: "pending",
-    },
-    paymentGateway: {
-      type: String,
-      required: [true, "payment gateway is required"],
-      enum: ["flutterwave"], // Payment gateway might differs as the application grows
-    },
+
+const Transaction = sequelize.define('Transaction', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
   },
-  {
-    timestamps: true,
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'id'
+    }
+  },
+  units: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  status: {
+    type: DataTypes.ENUM('pending', 'success', 'failed'),
+    allowNull: false,
+    defaultValue: 'pending'
+  },
+  amount: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  gateway: {
+    type: DataTypes.ENUM('paystack', 'flutterwave', 'stripe'),
+    allowNull: false,
+    defaultValue: 'flutterwave'
   }
-);
-
-const Transaction = mongoose.model("Transaction", transactionSchema);
+}, {
+  tableName: 'transactions',
+  timestamps: true
+});
 
 export default Transaction;

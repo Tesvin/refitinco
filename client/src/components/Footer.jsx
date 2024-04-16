@@ -7,8 +7,8 @@ const iconComponents = [FaFacebook, FaTwitter, FaGoogle, FaAirbnb, FaUber];
 //const iconRoutes = ['/facebook', '/twitter', '/google', '/airbnb', '/uber'];
 
 const iconRoutes = [
-  'https://www.facebook.com/',
-  'https://twitter.com/',
+  'https://www.facebook.com/profile.php/?id=61557149049526',
+  'https://twitter.com/refisolsV',
   'https://www.google.com/',
   'https://www.airbnb.com/',
   'https://www.uber.com/',
@@ -48,7 +48,7 @@ const Footer = () => {
           </Link>
         ))}
       </div>
-      <footer>Refitinco Solutions Inc. 2023. All Rights Reserved</footer>
+      <footer>Refitinco Solutions Inc. {new Date().getFullYear()}. All Rights Reserved</footer>
     </div>
   );
 };

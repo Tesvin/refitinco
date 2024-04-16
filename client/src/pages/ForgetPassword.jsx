@@ -23,9 +23,10 @@ export default function ForgetPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const url = import.meta.env.VITE_API_URL;
     try {
       dispatch(forgetStart());
-      const res = await fetch("/api/auth/reset_password", {
+      const res = await fetch(`${url}/api/auth/reset_password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

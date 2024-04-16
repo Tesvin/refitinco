@@ -67,7 +67,7 @@ export default function Header() {
         {/* Hamburger */}
         <div
           onClick={handleClick}
-          className="md:hidden z-10 text-white cursor-pointer"
+          className="md:hidden z-20 text-white cursor-pointer"
         >
           {!nav ? <FaBars /> : <FaTimes />}
         </div>
@@ -76,7 +76,7 @@ export default function Header() {
           className={
             !nav
               ? "hidden"
-              : "absolute top-0 left-0 w-full h-screen bg-green-900 flex flex-col justify-center items-center"
+              : "absolute top-0 left-0 w-full z-10 h-screen bg-green-900 flex flex-col justify-center items-center"
           }
         >
           <li className="py-6 text-4xl text-white hover:underline">

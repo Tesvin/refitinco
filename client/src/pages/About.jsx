@@ -1,4 +1,8 @@
-
+import Amazon from '../assets/amazon.png';
+import Microsoft from '../assets/microsoft.jpg';
+import Twitter from '../assets/twitter.png';
+import binance from '../assets/binance.png';
+import Facebook from '../assets/facebook.jpg';
 
 export default function About() {
   return (
@@ -34,6 +38,14 @@ export default function About() {
             the black race in general, while raking in massive financial financial
             returns for the owners.
           </p>  
+        </div>
+
+        <div className="grid grid-cols-5 my-4 gap-1 items-center">
+          <img src={Microsoft} className='h-12' alt="microsoft" />
+          <img src={Amazon} className='h-12' alt="amazon" />
+          <img src={Twitter} className='h-12' alt="twitter" />
+          <img src={binance} className='h-12' alt="binance" />
+          <img src={Facebook} className='h-12' alt="facebook" />
         </div>
     </div>
   );

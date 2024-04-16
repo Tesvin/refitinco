@@ -34,7 +34,24 @@ export default function FAQ () {
                     </p>     
                 </AccordionPanel>
             </AccordionItem>
-
+            <AccordionItem>
+                <h2 className='font-sans text-lg font-semibold'>
+                    <AccordionButton>
+                            <Box as="span" flex='1' textAlign='left'>
+                                Do you have a referral Program?
+                            </Box>
+                        <AccordionIcon />
+                    </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                    <p className='font-sans'>
+                        Yes,... When you register/Sign up as a member, you automatically get a referral link/code.
+                        You can easily share this your code/link to your friends and families in order for them to benefit from this limited offer too.
+                        You get a bonus of a unit share whenever your downlines purchase Cumulatively upto 5 units shares under you.
+                        This bonus share will be added to your main account.
+                    </p>     
+                </AccordionPanel>
+            </AccordionItem>
             <AccordionItem>
                 <h2 className='font-sans text-lg font-semibold'>
                 <AccordionButton>

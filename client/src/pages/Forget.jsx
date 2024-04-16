@@ -25,9 +25,10 @@ export default function Forget() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const url = import.meta.env.VITE_API_URL;
     try {
       dispatch(forgetStart());
-      const res = await fetch("/api/auth/reset_password", {
+      const res = await fetch(`${url}/api/auth/reset_password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +42,7 @@ export default function Forget() {
         return;
       }
       dispatch(forgetSuccess(data));
-      navigate("/login");
+      navigate("/sign-in");
     } catch (error) {
       dispatch(forgetFailure(error.message));
     }

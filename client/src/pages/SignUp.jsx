@@ -15,10 +15,11 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (e) => {
+    const url = import.meta.env.VITE_API_URL
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch(`${url}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,6 +96,19 @@ export default function SignUp() {
         </div>
 
         <div className="relative flex flex-col pt-3">
+          <label htmlFor="confirm" className="label_style">Confirm password</label>
+            <input
+            type="password"
+            placeholder="confirm password"
+            className="input_style "
+            id="confirm"
+            required
+            onChange={handleChange}
+          />
+          { formData.password !== formData.confirm && <p className="text-red-500 text-xs">Password does not match</p>}
+        </div>
+
+        <div className="relative flex flex-col pt-3">
           <label htmlFor="refer" className="label_style">Referral</label>
           <input
             name="refer"
@@ -120,7 +134,7 @@ export default function SignUp() {
           <span className="text-[#0a192f] font-bold">Sign in</span>
         </Link>
         {/* <Link to={"/sign-in"}>
-          <span className="p-6 text-red-300">forgoten password?</span>
+          <span className="p-6 text-red-300">forgotten password?</span>
         </Link> */}
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}

@@ -6,14 +6,15 @@ import axios from 'axios';
 const WalletBalance = () => {
   const [balance, setBalance] = useState(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
-  console.log(currentUser._id)
+  console.log(currentUser.id)
   //const dispatch = useDispatch();
 
     useEffect(() => {
     const fetchBalance = async () => {
       try {
         // Replace 'YOUR_API_BASE_URL' with the base URL of your API
-        const response = await axios.get(`/api/transaction/wallet/${currentUser._id}`);
+        const url = import.meta.env.VITE_API_URL;
+        const response = await axios.get(`${url}/api/transaction/wallet/${currentUser.id}`);
         setBalance(response.data);
       } catch (error) {
         error('Error fetching wallet balance');
@@ -30,7 +31,11 @@ const WalletBalance = () => {
     <div>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      {balance !== null && <p>Wallet Balance: {balance}</p>}
+      {balance !== null && <p className='text-center'>
+        <span className='text-6xl font-semibold'>{balance}</span>
+        <br />
+        Wallet Balance
+      </p>}
     </div>
   );
 };

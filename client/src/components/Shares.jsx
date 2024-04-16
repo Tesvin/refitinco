@@ -27,7 +27,7 @@ console.log(params)
 
   return (
     <div>
-      <h2>Your Shares Dashboard</h2>
+      <h2 className='font-semibold'>Your Shares Dashboard</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (

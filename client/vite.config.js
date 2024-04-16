@@ -6,11 +6,14 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        //target: 'https://refitinco.onrender.com/',
-        target: 'http://localhost:8080',
+        //target: 'https://refitsols.com',
+        target: 'http://localhost:5000',
         secure: false,
       },
     },
+  },
+  build: {
+    chunkSizeWarningLimit: 1024
   },
   plugins: [react()],
 })

@@ -16,9 +16,10 @@ export default function Buy() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const url = import.meta.env.VITE_API_URL;
     try {
       dispatch(paymentStart());
-      const res = await fetch("/api/auth/flutterwave", {
+      const res = await fetch(`${url}/api/auth/flutterwave`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

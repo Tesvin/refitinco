@@ -1,9 +1,9 @@
-import User from "../model/user.model.js";
+import User from "../model/user.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from 'uuid';
-import { ObjectId } from "mongoose";
+import Mailer from "../service/Mailer.js";
 
 
 
@@ -13,22 +13,40 @@ export const signup = async (req, res, next) => {
   if (!firstname && !lastname && !email && !password) {
     return res.status(400).json({error: 'Missing field'})
   }
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ where: { 'email': email }});
   if (user) return next(errorHandler(401, 'Your email already exist'));
   const hashedPassword = bcryptjs.hashSync(password, 10);
   if (refer) {
     const parentId = await User.findOne({ parent_refer: refer })
   }
-  const newUser = new User({
-    firstname,
-    lastname,
-    email,
-    password: hashedPassword,
-    parent_refer: refer || '',
-    refer_code: uuidv4()
-   });
+  const mailResponse = await Mailer.mail(email,
+    {
+      title: 'Refitsols',
+      body: `
+        <html>
+        <body>
+          <h1>Reftinco Email Verification</h1>
+          Hi ${firstname}, <br>
+          We've received your request due to attempt to create an account.
+          <p> Your registration was successful </p>
+          If you didn't attempt signing up, you can safely ignore this email. Someone else might have typed your email address by mistake.
+          Thanks <br>
+          <strong>Reftinco Team</strong>
+        </body>
+        <html>
+      `
+  });
+  if (mailResponse.error) return res.status(500).json({error: 'An error occured while sending message'});
+  const xid = uuidv4()
   try {
-    await newUser.save();
+    const newUser = await User.create({
+      firstname,
+      lastname,
+      email,
+      password: hashedPassword,
+      parent_refer: refer || '',
+      refer_code: xid.split('-')[0]
+    });
     res.status(201).json("User created successfully");
   } catch (error) {
     next(error);
@@ -40,16 +58,17 @@ export const signin = async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) return res.status(400).json({error: 'Missing field'})
   try {
-    const validUser = await User.findOne({ email });
+    const validUser = await User.findOne({ where: {'email': email } });
     if (!validUser) return next(errorHandler(401, "Not a member!"));
     const validPassword = bcryptjs.compareSync(password, validUser.password);
     if (!validPassword) return next(errorHandler(400, "Incorrect password!"));
-    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-    const { password: pass, ...rest } = validUser._doc;
+    const token = jwt.sign({ id: validUser.id }, process.env.JWT_SECRET);
+    const userData = validUser.get({ plain: true });
+    delete userData.password;
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
-      .json(rest);
+      .json(userData);
   } catch (error) {
     next(error);
   }
@@ -76,11 +95,11 @@ export const getResetToken = async (req, res, next) => {
 
   if (!email) return next(errorHandler(400, 'Missing field'));
   try {
-    const user = await User.findOne({ 'email': email });
+    const user = await User.findOne({where: {'email': email} });
     if (!user) return next(errorHandler(401, 'Not a member'));
-    const id = new ObjectId(user.id);
     const token = uuidv4();
-    await User.updateOne({ id }, { $set: { refer_code: token }});
+    user.token = token;
+    await user.save();
     return res.status(200).json({ 'email': email, 'reset_token': token });
   } catch (error) {
     next(error);
@@ -92,6 +111,8 @@ export const updatePassword = async (req, res, next) => {
   if (!email) return next(errorHandler(400, 'Missing email'));
   if (!password) return next(errorHandler(400, 'Missing password'));
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  await User.updateOne({ email }, { $set: { password: hashedPassword } });
+  const user = await User.findOne({where: {'email': email} });
+  user.set({ password: hashedPassword });
+  await user.save()
   return res.status(200).json("Password updated successfully");
 }

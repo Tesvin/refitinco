@@ -25,9 +25,10 @@ export default function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const url = import.meta.env.VITE_API_URL;
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${url}/api/user/update/${currentUser.id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ export default function Profile() {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`/api/user/delete/${currentUser.id}`, {
         method: 'DELETE',
       });
       const data = await res.json();
